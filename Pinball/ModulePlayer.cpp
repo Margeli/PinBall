@@ -1,9 +1,17 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModulePlayer.h"
+#include "ModuleInput.h"
+#include "ModulePhysics.h"
+#include "ModuleRender.h"
+#include "ModuleTextures.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
+	ball_tex = NULL;
+
+
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -12,14 +20,20 @@ ModulePlayer::~ModulePlayer()
 // Load assets
 bool ModulePlayer::Start()
 {
-	LOG("Loading player");
+	LOG("Loading ball");
+	
+	ball_tex = App->textures->Load("pinball/Pinballthings.png");
+	
+	player_ball = App->physics->CreateCircle(400,100, 22) ;
+	
+
 	return true;
 }
 
 // Unload assets
 bool ModulePlayer::CleanUp()
 {
-	LOG("Unloading player");
+	LOG("Unloading ball");
 
 	return true;
 }
@@ -27,6 +41,14 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+
+	//Ball Draw--------------------
+	player_ball->GetPosition(position.x, position.y);
+
+
+	App->renderer->Blit(ball_tex, position.x, position.y, NULL, 1.0f, player_ball->GetRotation());
+
+
 	return UPDATE_CONTINUE;
 }
 
