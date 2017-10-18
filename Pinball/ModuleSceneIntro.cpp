@@ -25,7 +25,7 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
-	//map = App->textures->Load("pinball/map");
+	map_tex = App->textures->Load("pinball/background.png");
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
@@ -47,7 +47,10 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	
+	if (map_tex != NULL)
+	{
+		App->renderer->Blit(map_tex, 0, 0, NULL, 1.0f);
+	}
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -155,6 +158,7 @@ update_status ModuleSceneIntro::Update()
 		c = c->next;
 	}
 
+
 	// ray -----------------
 	if(ray_on == true)
 	{
@@ -169,6 +173,8 @@ update_status ModuleSceneIntro::Update()
 	}
 
 	return UPDATE_CONTINUE;
+
+
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)

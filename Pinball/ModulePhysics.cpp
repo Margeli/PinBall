@@ -53,7 +53,7 @@ bool ModulePhysics::Start()
 	big_ball->CreateFixture(&fixture);
 	
 	//Backgroud big chain
-	int bg_position[98] = {
+	int bg_big_position[98] = {
 		183, 107,
 		152, 54,
 		87, 70,
@@ -104,7 +104,68 @@ bool ModulePhysics::Start()
 		284, 107,
 		183, 107
 	};
-	CreateChain(0, 0, bg_position, 97, b2_staticBody);
+	PhysBody* bg_big_chain = CreateChain(0, 0, bg_big_position, 97, b2_staticBody);
+
+	//Background top left triangle
+	int bg_tl_triangle_pos[22] = {
+		136, 181,
+		143, 183,
+		191, 250,
+		190, 255,
+		186, 259,
+		179, 258,
+		131, 233,
+		129, 229,
+		129, 187,
+		131, 181,
+		136, 181
+	};
+	PhysBody* bg_tl_triangle = CreateChain(0, 0, bg_tl_triangle_pos, 21, b2_staticBody);
+
+	//Background top right triangle
+	int bg_tr_triangle_pos[16] = {
+		325, 182,
+		335, 181,
+		338, 188,
+		338, 231,
+		288, 259,
+		280, 259,
+		275, 248,
+		325, 182
+	};
+	PhysBody* bg_tr_triangle = CreateChain(0, 0, bg_tr_triangle_pos, 15, b2_staticBody);
+
+	//Background bottom left triangle
+	int bg_lr_triangle_pos[22] = {
+		97, 614,
+		102, 609,
+		108, 609,
+		114, 613,
+		145, 683,
+		146, 692,
+		140, 698,
+		131, 698,
+		98, 677,
+		96, 674,
+		97, 615
+	};
+	PhysBody* bg_lr_triangle = CreateChain(0, 0, bg_lr_triangle_pos, 21, b2_staticBody);
+
+	//Background bottom right triangle
+	int bg_br_triangle_pos[22] = {
+		366, 610,
+		371, 613,
+		372, 672,
+		370, 676,
+		336, 698,
+		328, 698,
+		322, 692,
+		323, 685,
+		354, 615,
+		359, 609,
+		366, 609
+	};
+	PhysBody* bg_br_triangle = CreateChain(0, 0, bg_br_triangle_pos, 21, b2_staticBody);
 
 	return true;
 }
