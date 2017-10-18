@@ -167,6 +167,24 @@ bool ModulePhysics::Start()
 	};
 	PhysBody* bg_br_triangle = CreateChain(0, 0, bg_br_triangle_pos, 21, b2_staticBody);
 
+	//Background bottom left stick
+	int bg_bl_stick_pos[26] = {
+		65, 620,
+		71, 622,
+		72, 627,
+		72, 686,
+		75, 691,
+		150, 737,
+		142, 748,
+		65, 701,
+		61, 697,
+		59, 691,
+		59, 626,
+		61, 621,
+		65, 620
+	};
+	PhysBody* bg_bl_stick = CreateChain(0, 0, bg_bl_stick_pos, 25, b2_staticBody);
+
 	return true;
 }
 
