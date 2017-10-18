@@ -9,7 +9,7 @@
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	ball_tex = NULL;
-
+	
 
 
 }
@@ -22,9 +22,9 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading ball");
 	
-	ball_tex = App->textures->Load("pinball/Pinballthings.png");
+	ball_tex = App->textures->Load("pinball/ball.png");
 	
-	player_ball = App->physics->CreateCircle(400,100, 22) ;
+	player_ball = App->physics->CreateCircle(455,395, 11) ;
 	
 
 	return true;
@@ -34,6 +34,8 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading ball");
+
+	
 
 	return true;
 }
