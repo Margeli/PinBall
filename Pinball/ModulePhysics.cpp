@@ -43,7 +43,6 @@ bool ModulePhysics::Start()
 	b2BodyDef body;
 	body.type = b2_staticBody;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
 	b2Body* big_ball = world->CreateBody(&body);
 
 	b2CircleShape shape;
@@ -52,6 +51,60 @@ bool ModulePhysics::Start()
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
 	big_ball->CreateFixture(&fixture);
+	
+	//Backgroud big chain
+	int bg_position[98] = {
+		183, 107,
+		152, 54,
+		87, 70,
+		87, 96,
+		49, 134,
+		40, 160,
+		35, 190,
+		38, 208,
+		49, 238,
+		81, 355,
+		67, 362,
+		41, 436,
+		77, 525,
+		76, 535,
+		30, 601,
+		30, 712,
+		36, 729,
+		158, 798,
+		0, 797,
+		0, 89,
+		49, 83,
+		117, 1,
+		350, -1,
+		410, 81,
+		477, 87,
+		477, 797,
+		307, 800,
+		423, 731,
+		435, 715,
+		434, 603,
+		388, 534,
+		422, 435,
+		401, 365,
+		383, 357,
+		423, 212,
+		434, 205,
+		444, 229,
+		444, 508,
+		458, 517,
+		468, 508,
+		468, 243,
+		460, 204,
+		443, 168,
+		412, 126,
+		378, 100,
+		381, 72,
+		314, 55,
+		284, 107,
+		183, 107
+	};
+	CreateChain(0, 0, bg_position, 97, b2_staticBody);
 
 	return true;
 }
@@ -151,10 +204,10 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2BodyType type)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
