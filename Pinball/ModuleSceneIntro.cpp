@@ -10,6 +10,7 @@
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	circle = box = rick = NULL;
+	left_flipper = right_flipper = NULL;
 	ray_on = false;
 	sensed = false;
 }
@@ -25,6 +26,8 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	left_flipper = App->textures->Load("pinball/left_flipper.png"); 
+	right_flipper = App->textures->Load("pinball/right_flipper.png");
 	map_tex = App->textures->Load("pinball/background.png");
 	circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
@@ -32,6 +35,45 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+
+	int leftflip_pos[26] = {
+		3, 2,
+		0, 5,
+		0, 12,
+		3, 16,
+		7, 18,
+		55, 17,
+		75, 16,
+		79, 12,
+		79, 7,
+		75, 3,
+		54, 1,
+		7, 0,
+		3, 2
+	};
+
+	// Pivot 0, 0
+	int rightflip_pos[30] = {
+		72, 0,
+		78, 2,
+		80, 6,
+		80, 11,
+		78, 16,
+		73, 18,
+		22, 17,
+		9, 17,
+		4, 15,
+		0, 12,
+		0, 7,
+		3, 3,
+		8, 2,
+		22, 1,
+		72, 0
+	};
+
+	
+	PhysBody* leftflipper = App->physics->CreateChain(145, 736, leftflip_pos, 25, b2_staticBody);
+	PhysBody* rightflipper = App->physics->CreateChain(246, 736, rightflip_pos, 29, b2_staticBody);
 
 	return ret;
 }
@@ -51,6 +93,11 @@ update_status ModuleSceneIntro::Update()
 	{
 		App->renderer->Blit(map_tex, 0, 0, NULL, 1.0f);
 	}
+
+	// Pivot 0, 0
+	
+	
+
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -172,6 +219,11 @@ update_status ModuleSceneIntro::Update()
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}
 
+	if (left_flipper != NULL&& right_flipper != NULL) {
+		App->renderer->Blit(left_flipper, 145, 736, NULL, 1.0f);
+		App->renderer->Blit(right_flipper, 246, 736, NULL, 1.0f);
+
+	}
 	return UPDATE_CONTINUE;
 
 

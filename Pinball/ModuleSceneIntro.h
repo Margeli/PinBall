@@ -22,10 +22,13 @@ public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
+	
 
 	PhysBody* sensor;
 	bool sensed;
 	
+	SDL_Texture* left_flipper;
+	SDL_Texture* right_flipper;
 	SDL_Texture* map_tex;
 	SDL_Texture* circle;
 	SDL_Texture* box;

@@ -24,7 +24,7 @@ bool ModulePlayer::Start()
 	
 	ball_tex = App->textures->Load("pinball/ball.png");
 	
-	player_ball = App->physics->CreateCircle(455,395, 11) ;
+	player_ball = App->physics->CreateCircle(455,395, 10) ;
 	
 
 	return true;
