@@ -185,6 +185,77 @@ bool ModulePhysics::Start()
 	};
 	PhysBody* bg_bl_stick = CreateChain(0, 0, bg_bl_stick_pos, 25, b2_staticBody);
 
+	//Background bottom right stick
+	int bg_br_stick_pos[26] = {
+		402, 621,
+		407, 623,
+		409, 628,
+		408, 693,
+		403, 701,
+		327, 746,
+		320, 736,
+		388, 695,
+		393, 692,
+		396, 687,
+		396, 627,
+		398, 622,
+		402, 621
+	};
+	PhysBody* bg_br_stick = CreateChain(0, 0, bg_br_stick_pos, 25, b2_staticBody);
+
+	//Background top left stick
+	int bg_tl_stick_pos[42] = {
+		105, 144,
+		98, 142,
+		90, 149,
+		81, 162,
+		77, 174,
+		76, 189,
+		79, 199,
+		114, 320,
+		119, 326,
+		127, 326,
+		185, 305,
+		191, 300,
+		192, 293,
+		189, 288,
+		109, 247,
+		90, 183,
+		90, 176,
+		93, 168,
+		106, 154,
+		107, 148,
+		105, 144
+	};
+	PhysBody* bg_tl_stick = CreateChain(0, 0, bg_tl_stick_pos, 41, b2_staticBody);
+
+	//Background top right stick
+	int bg_tr_stick_pos[44] = {
+		361, 144,
+		366, 142,
+		371, 143,
+		388, 164,
+		390, 172,
+		390, 193,
+		353, 319,
+		347, 325,
+		339, 326,
+		279, 304,
+		275, 300,
+		274, 296,
+		275, 292,
+		278, 288,
+		358, 247,
+		378, 181,
+		378, 174,
+		375, 168,
+		365, 159,
+		360, 154,
+		359, 149,
+		361, 144
+	};
+	PhysBody* bg_tr_stick = CreateChain(0, 0, bg_tr_stick_pos, 43, b2_staticBody);
+
 	return true;
 }
 
