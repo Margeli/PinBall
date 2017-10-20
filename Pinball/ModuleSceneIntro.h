@@ -3,6 +3,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "Animation.h"
 
 class PhysBody;
 
@@ -24,10 +25,14 @@ public:
 	p2List<PhysBody*> ricks;*/
 	PhysBody* leftflipper;
 	PhysBody* rightflipper;
+	PhysBody* pusher;
 
 	PhysBody* sensor;
 	bool sensed;
 	
+	Animation* current_animpusher = nullptr;
+	Animation anim_pusher;
+	SDL_Texture* spritesheet;
 	SDL_Texture* left_flipper;
 	SDL_Texture* right_flipper;
 	SDL_Texture* pusher_ball;
