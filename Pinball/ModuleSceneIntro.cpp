@@ -27,6 +27,14 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	anim_pusher.PushBack({ 0,0, 19, 103 });
+	anim_pusher.PushBack({ 24,0, 19, 103 });
+	anim_pusher.PushBack({ 48,0, 19, 103 });
+	anim_pusher.PushBack({ 72,0, 19, 103 });
+	anim_pusher.PushBack({ 0,0, 19, 103 });
+	anim_pusher.speed = 0.05f;
+	
+	spritesheet = App->textures->Load("pinball/Pinballthings.png");
 	left_flipper = App->textures->Load("pinball/left_flipper.png"); 
 	right_flipper = App->textures->Load("pinball/right_flipper.png");
 	pusher_ball = App->textures->Load("pinball/pusher_ball.png");
@@ -37,7 +45,9 @@ bool ModuleSceneIntro::Start()
 	//bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
-	
+
+	pusher=App->physics->CreateRectangle(455, 416, 18, 20);
+
 	leftflipper = App->physics->CreateRectangle(145, 736, 80, 18);
 	rightflipper = App->physics->CreateRectangle(246, 736, 80, 18);
 
@@ -59,8 +69,8 @@ update_status ModuleSceneIntro::Update()
 	{
 		App->renderer->Blit(map_tex, 0, 0, NULL, 1.0f);
 	}
+	
 
-	// Pivot 0, 0
 	
 	
 	/*
@@ -134,6 +144,28 @@ update_status ModuleSceneIntro::Update()
 	fVector normal(0.0f, 0.0f);
 
 	// All draw functions ------------------------------------------------------
+
+	//FLIPPER DRAWING-------
+	if (left_flipper != NULL&& right_flipper != NULL&& spritesheet!=NULL) {
+		int x, y;
+		leftflipper->GetPosition(x, y);
+		App->renderer->Blit(left_flipper, x, y, NULL, 1.0f, leftflipper->GetRotation());
+
+		rightflipper->GetPosition(x, y);
+		App->renderer->Blit(right_flipper, x, y, NULL, 1.0f, rightflipper->GetRotation());
+
+		pusher->GetPosition(x, y);
+		current_animpusher = &anim_pusher;
+		App->renderer->Blit(spritesheet, x, y, &current_animpusher->GetCurrentFrame()), 1.0f;
+	}
+
+
+	
+
+
+
+
+
 	/*p2List_item<PhysBody*>* c = circles.getFirst();
 
 	while(c != NULL)
@@ -184,16 +216,9 @@ update_status ModuleSceneIntro::Update()
 		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}*/
+	
 
-	if (left_flipper != NULL&& right_flipper != NULL) {
-		int x, y;
-		leftflipper->GetPosition(x, y);
-		App->renderer->Blit(left_flipper, x,y, NULL, 1.0f, leftflipper->GetRotation());
-
-		rightflipper->GetPosition(x, y);
-		App->renderer->Blit(right_flipper, x, y, NULL, 1.0f, rightflipper->GetRotation());
-
-	}
+	
 	return UPDATE_CONTINUE;
 
 
