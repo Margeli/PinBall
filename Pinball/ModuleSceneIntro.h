@@ -29,6 +29,7 @@ public:
 	
 	SDL_Texture* left_flipper;
 	SDL_Texture* right_flipper;
+	SDL_Texture* pusher_ball;
 	SDL_Texture* map_tex;
 	SDL_Texture* circle;
 	SDL_Texture* box;
