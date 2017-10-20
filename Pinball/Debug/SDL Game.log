@@ -1,6 +1,16 @@
-﻿  ModuleSceneIntro.cpp
-c:\users\carlesma\documents\github\pinball\pinball\modulesceneintro.cpp(209): warning C4101: 'y': unreferenced local variable
-c:\users\carlesma\documents\github\pinball\pinball\modulesceneintro.cpp(209): warning C4101: 'x': unreferenced local variable
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
-  SDL Game.vcxproj -> C:\Users\carlesma\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe
-  SDL Game.vcxproj -> C:\Users\carlesma\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.pdb (Partial PDB)
+﻿  ModulePhysics.cpp
+c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(40): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(367): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(368): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(411): warning C4018: '<': signed/unsigned mismatch
+c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(629): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(630): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(636): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
+c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\cmath(113): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  ModuleSceneIntro.cpp
+  ModulePlayer.cpp
+  Application.cpp
+  SDL Game.vcxproj -> C:\Users\normanbg\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe
+  SDL Game.vcxproj -> C:\Users\normanbg\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.pdb (Partial PDB)

@@ -37,11 +37,6 @@ bool ModuleSceneIntro::Start()
 	//bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
-
-	App->physics->CreateRectangle(455, 416, 18, 20);
-	
-	
-	
 	
 	leftflipper = App->physics->CreateRectangle(145, 736, 80, 18);
 	rightflipper = App->physics->CreateRectangle(246, 736, 80, 18);

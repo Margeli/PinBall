@@ -152,7 +152,7 @@ bool ModulePhysics::Start()
 		182, 104
 	};
 
-	PhysBody* bg_big_chain = CreateChain(0, 0, bg_big_position, 191, b2_staticBody);
+	bg_big_chain = CreateChain(0, 0, bg_big_position, 191, b2_staticBody);
 
 	//Background top left triangle
 	int bg_tl_triangle_pos[22] = {
@@ -168,7 +168,7 @@ bool ModulePhysics::Start()
 		131, 181,
 		136, 181
 	};
-	PhysBody* bg_tl_triangle = CreateChain(0, 0, bg_tl_triangle_pos, 21, b2_staticBody);
+	bg_tl_triangle = CreateChain(0, 0, bg_tl_triangle_pos, 21, b2_staticBody);
 
 	//Background top right triangle
 	int bg_tr_triangle_pos[16] = {
@@ -181,7 +181,7 @@ bool ModulePhysics::Start()
 		275, 248,
 		325, 182
 	};
-	PhysBody* bg_tr_triangle = CreateChain(0, 0, bg_tr_triangle_pos, 15, b2_staticBody);
+	bg_tr_triangle = CreateChain(0, 0, bg_tr_triangle_pos, 15, b2_staticBody);
 
 	//Background bottom left triangle
 	int bg_lr_triangle_pos[22] = {
@@ -197,7 +197,7 @@ bool ModulePhysics::Start()
 		96, 674,
 		97, 615
 	};
-	PhysBody* bg_lr_triangle = CreateChain(0, 0, bg_lr_triangle_pos, 21, b2_staticBody);
+	bg_lr_triangle = CreateChain(0, 0, bg_lr_triangle_pos, 21, b2_staticBody);
 
 	//Background bottom right triangle
 	int bg_br_triangle_pos[22] = {
@@ -213,7 +213,7 @@ bool ModulePhysics::Start()
 		359, 609,
 		366, 609
 	};
-	PhysBody* bg_br_triangle = CreateChain(0, 0, bg_br_triangle_pos, 21, b2_staticBody);
+	 bg_br_triangle = CreateChain(0, 0, bg_br_triangle_pos, 21, b2_staticBody);
 
 	//Background bottom left stick
 	int bg_bl_stick_pos[26] = {
@@ -231,7 +231,7 @@ bool ModulePhysics::Start()
 		61, 621,
 		65, 620
 	};
-	PhysBody* bg_bl_stick = CreateChain(0, 0, bg_bl_stick_pos, 25, b2_staticBody);
+	bg_bl_stick = CreateChain(0, 0, bg_bl_stick_pos, 25, b2_staticBody);
 
 	//Background bottom right stick
 	int bg_br_stick_pos[26] = {
@@ -249,7 +249,7 @@ bool ModulePhysics::Start()
 		398, 622,
 		402, 621
 	};
-	PhysBody* bg_br_stick = CreateChain(0, 0, bg_br_stick_pos, 25, b2_staticBody);
+	bg_br_stick = CreateChain(0, 0, bg_br_stick_pos, 25, b2_staticBody);
 
 	//Background top left stick
 	int bg_tl_stick_pos[42] = {
@@ -275,16 +275,11 @@ bool ModulePhysics::Start()
 		107, 148,
 		105, 144
 	};
-	PhysBody* bg_tl_stick = CreateChain(0, 0, bg_tl_stick_pos, 41, b2_staticBody);
+	bg_tl_stick = CreateChain(0, 0, bg_tl_stick_pos, 41, b2_staticBody);
 
 	//Background top right stick
 	int bg_tr_stick_pos[44] = {
-		361, 144,
-		366, 142,
-		371, 143,
-		388, 164,
-		390, 172,
-		390, 193,
+		361, 144, 366, 142, 371, 143, 388, 164,	390, 172, 390, 193,
 		353, 319,
 		347, 325,
 		339, 326,
@@ -302,7 +297,8 @@ bool ModulePhysics::Start()
 		359, 149,
 		361, 144
 	};
-	PhysBody* bg_tr_stick = CreateChain(0, 0, bg_tr_stick_pos, 43, b2_staticBody);
+	bg_tr_stick = CreateChain(0, 0, bg_tr_stick_pos, 43, b2_staticBody);
+	rectangle_joint = App->physics->CreateRectangle(455, 416, 18, 20);
 
 	return true;
 }
@@ -448,6 +444,7 @@ update_status ModulePhysics::PostUpdate()
 	// You need to provide your own macro to translate meters to pixels
 
 	b2Body* body_found = nullptr;
+	
 	b2Vec2 mouse_position = { PIXEL_TO_METERS(App->input->GetMouseX()), PIXEL_TO_METERS(App->input->GetMouseY()) };
 	for(b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 	{
@@ -531,6 +528,14 @@ update_status ModulePhysics::PostUpdate()
 			// test if the current body contains mouse position
 		}
 	}
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+   		b2PrismaticJointDef pusher;
+		pusher.bodyA = bg_big_chain->body;
+		pusher.bodyB = rectangle_joint->body;
+		pusher.enableLimit = true;
+	}
+
 	// If a body was selected we will attach a mouse joint to it
 	// so we can pull it around
 	// TODO 2: If a body was selected, create a mouse joint

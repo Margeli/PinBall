@@ -56,4 +56,14 @@ private:
 	b2World* world;
 	b2MouseJoint* mouse_joint;
 	b2Body* ground;
+	PhysBody* rectangle_joint;
+	PhysBody* bg_big_chain;
+	PhysBody* bg_tl_triangle;
+	PhysBody* bg_tr_triangle;
+	PhysBody* bg_lr_triangle;
+	PhysBody* bg_br_triangle;
+	PhysBody* bg_bl_stick;
+	PhysBody* bg_br_stick;
+	PhysBody* bg_tl_stick;
+	PhysBody* bg_tr_stick;
 };
