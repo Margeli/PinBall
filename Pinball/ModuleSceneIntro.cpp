@@ -31,20 +31,20 @@ bool ModuleSceneIntro::Start()
 	right_flipper = App->textures->Load("pinball/right_flipper.png");
 	pusher_ball = App->textures->Load("pinball/pusher_ball.png");
 	map_tex = App->textures->Load("pinball/background.png");
-	circle = App->textures->Load("pinball/wheel.png"); 
-	box = App->textures->Load("pinball/crate.png");
-	rick = App->textures->Load("pinball/rick_head.png");
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	//circle = App->textures->Load("pinball/wheel.png"); 
+	//box = App->textures->Load("pinball/crate.png");
+	//rick = App->textures->Load("pinball/rick_head.png");
+	//bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
+	App->physics->CreateRectangle(455, 416, 18, 20);
 	
 	
-	// Pivot 0, 0
 	
 	
-	PhysBody* leftflipper = App->physics->CreateRectangle(145, 736, 80, 18);
-	PhysBody* rightflipper = App->physics->CreateRectangle(246, 736, 80, 18);
+	leftflipper = App->physics->CreateRectangle(145, 736, 80, 18);
+	rightflipper = App->physics->CreateRectangle(246, 736, 80, 18);
 
 	return ret;
 }
@@ -68,7 +68,7 @@ update_status ModuleSceneIntro::Update()
 	// Pivot 0, 0
 	
 	
-
+	/*
 
 	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	{
@@ -127,7 +127,7 @@ update_status ModuleSceneIntro::Update()
 		};
 
 		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64,b2_dynamicBody));
-	}
+	}*/
 
 	// Prepare for raycast ------------------------------------------------------
 	
@@ -139,7 +139,7 @@ update_status ModuleSceneIntro::Update()
 	fVector normal(0.0f, 0.0f);
 
 	// All draw functions ------------------------------------------------------
-	p2List_item<PhysBody*>* c = circles.getFirst();
+	/*p2List_item<PhysBody*>* c = circles.getFirst();
 
 	while(c != NULL)
 	{
@@ -188,11 +188,15 @@ update_status ModuleSceneIntro::Update()
 
 		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
-	}
+	}*/
 
 	if (left_flipper != NULL&& right_flipper != NULL) {
-		App->renderer->Blit(left_flipper, 145, 736, NULL, 1.0f);
-		App->renderer->Blit(right_flipper, 246, 736, NULL, 1.0f);
+		int x, y;
+		leftflipper->GetPosition(x, y);
+		App->renderer->Blit(left_flipper, x,y, NULL, 1.0f, leftflipper->GetRotation());
+
+		rightflipper->GetPosition(x, y);
+		App->renderer->Blit(right_flipper, x, y, NULL, 1.0f, rightflipper->GetRotation());
 
 	}
 	return UPDATE_CONTINUE;

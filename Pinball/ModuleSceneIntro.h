@@ -19,10 +19,11 @@ public:
 
 public:
 	PhysBody* maps;
-	p2List<PhysBody*> circles;
+	/*p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
-	p2List<PhysBody*> ricks;
-	
+	p2List<PhysBody*> ricks;*/
+	PhysBody* leftflipper;
+	PhysBody* rightflipper;
 
 	PhysBody* sensor;
 	bool sensed;

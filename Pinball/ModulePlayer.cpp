@@ -26,7 +26,7 @@ bool ModulePlayer::Start()
 	
 	player_ball = App->physics->CreateCircle(455,395, 10) ;
 	
-
+	
 	return true;
 }
 
@@ -34,7 +34,7 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading ball");
-
+	
 	
 
 	return true;
