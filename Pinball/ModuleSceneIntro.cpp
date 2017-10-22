@@ -26,6 +26,8 @@ bool ModuleSceneIntro::Start()
 	bool ret = true;
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
+	//Pinball ground that ball can't go outside
+	App->physics->PinballGround();
 
 	anim_pusher.PushBack({ 0,0, 19, 103 });
 	anim_pusher.PushBack({ 24,0, 19, 103 });
@@ -39,14 +41,12 @@ bool ModuleSceneIntro::Start()
 	right_flipper = App->textures->Load("pinball/right_flipper.png");
 	pusher_ball = App->textures->Load("pinball/pusher_ball.png");
 	map_tex = App->textures->Load("pinball/background.png");
-	//circle = App->textures->Load("pinball/wheel.png"); 
-	//box = App->textures->Load("pinball/crate.png");
-	//rick = App->textures->Load("pinball/rick_head.png");
+
 	//bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
-	pusher=App->physics->CreateRectangle(455, 416, 18, 20);
+	
 
 	leftflipper = App->physics->CreateRectangle(145, 736, 80, 18);
 	rightflipper = App->physics->CreateRectangle(246, 736, 80, 18);
@@ -154,9 +154,6 @@ update_status ModuleSceneIntro::Update()
 		rightflipper->GetPosition(x, y);
 		App->renderer->Blit(right_flipper, x, y, NULL, 1.0f, rightflipper->GetRotation());
 
-		pusher->GetPosition(x, y);
-		current_animpusher = &anim_pusher;
-		App->renderer->Blit(spritesheet, x, y, &current_animpusher->GetCurrentFrame()), 1.0f;
 	}
 
 
