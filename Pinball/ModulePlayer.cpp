@@ -28,7 +28,6 @@ bool ModulePlayer::Start()
 	right_flipper = App->textures->Load("pinball/right_flipper.png");
 	pusher_ball = App->textures->Load("pinball/pusher_ball.png");
 	
-	
 	setBall(455, 395, 0.5f);
 	setPusher();
 	setLeftFlipper();
@@ -51,6 +50,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
@@ -89,6 +89,7 @@ void ModulePlayer::setPusher(){
 
 	pusher = App->physics->CreateRectangle(455, 416, 18, 100, b2_dynamicBody);
 	pusher_pivot = App->physics->CreateRectangle(455, 416, 18, 20, b2_staticBody);
+
 
 	b2PrismaticJointDef prismaticJointDef;
 
