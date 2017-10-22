@@ -41,7 +41,7 @@ bool ModuleSceneIntro::Start()
 	
 	map_tex = App->textures->Load("pinball/background.png");
 
-	//bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 

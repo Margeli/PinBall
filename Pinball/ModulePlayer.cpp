@@ -69,6 +69,16 @@ update_status ModulePlayer::Update()
 		 L_Flipper_joint->EnableMotor(false);
 	 }
 
+	 if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	 {
+		 pusherjoint->EnableMotor(true);
+	 }
+	 if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+	 {
+		 pusherjoint->EnableMotor(false);
+	 }
+
+	 
 	//Flippers Draw------
 	 
 	R_Flipper->GetPosition(position.x, position.y);
@@ -85,10 +95,16 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModulePlayer::OnCollision(PhysBody * body_A, PhysBody * body_B)
+{
+	App->audio->PlayFx(App->scene_intro->bonus_fx);
+}
+
+
 void ModulePlayer::setPusher(){
 
 	pusher = App->physics->CreateRectangle(455, 416, 18, 100, b2_dynamicBody);
-	pusher_pivot = App->physics->CreateRectangle(455, 416, 18, 20, b2_staticBody);
+	pusher_pivot = App->physics->CreateRectangle(457, 502, 18, 20, b2_staticBody);
 
 
 	b2PrismaticJointDef prismaticJointDef;
@@ -105,7 +121,7 @@ void ModulePlayer::setPusher(){
 	prismaticJointDef.enableLimit = true;
 	prismaticJointDef.lowerTranslation = 0;
 	prismaticJointDef.upperTranslation = PIXEL_TO_METERS(50);
-	prismaticJointDef.enableMotor = true;
+	prismaticJointDef.enableMotor = false;
 	prismaticJointDef.maxMotorForce = 500;
 	prismaticJointDef.motorSpeed = 5000;
 
@@ -171,5 +187,5 @@ void ModulePlayer::setLeftFlipper() {
 void ModulePlayer::setBall(uint x, uint y, float restitution)
 {
 	player_ball = App->physics->CreateCircle(x, y, 10, restitution);
-
+	player_ball->listener = this; //calls OnCollision function
 }

@@ -22,6 +22,7 @@ public:
 	iPoint position;
 	
 private:
+	void OnCollision(PhysBody * bodyA, PhysBody * bodyB);
 	void setRightFlipper();
 	void setLeftFlipper();
 	void setPusher();

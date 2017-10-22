@@ -1,9 +1,11 @@
 // Pivot 0, 0
-int background[2] = {
-	458, 531
+int background[4] = {
+	447, 502,
+	471, 502
 };
 
 // Pivot 0.000000, 0.000000
-float background[2] = {
-	0.954167f, 0.663750f
+float background[4] = {
+	0.931250f, 0.627500f,
+	0.981250f, 0.627500f
 };
