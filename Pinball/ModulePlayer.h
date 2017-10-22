@@ -3,6 +3,7 @@
 #include "Globals.h"
 #include "p2List.h"
 #include "p2Point.h"
+#include "Box2D/Box2D/Box2D.h"
 
 
 class PhysBody;
@@ -34,4 +35,6 @@ public:
 private:
 	PhysBody* pusher;
 	PhysBody* pusher_pivot;
+
+	b2PrismaticJoint* pusherjoint;
 };

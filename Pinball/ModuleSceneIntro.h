@@ -25,7 +25,7 @@ public:
 	p2List<PhysBody*> ricks;*/
 	PhysBody* leftflipper;
 	PhysBody* rightflipper;
-	PhysBody* pusher;
+	
 
 	PhysBody* sensor;
 	bool sensed;

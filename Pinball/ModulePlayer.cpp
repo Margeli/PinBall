@@ -65,7 +65,7 @@ void ModulePlayer::setPusher()
 	prismaticJointDef.maxMotorForce = 500;
 	prismaticJointDef.motorSpeed = 5000;
 	
-	b2PrismaticJoint* pusherjoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&prismaticJointDef);
+	pusherjoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&prismaticJointDef);
 }
 
 
