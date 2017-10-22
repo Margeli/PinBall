@@ -1,3 +1,17 @@
 ﻿  ModulePlayer.cpp
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
-  SDL Game.vcxproj -> C:\Users\Norman-PC\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe
+d:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  ModulePhysics.cpp
+c:\users\carles\documents\github\pinball\pinball\modulephysics.cpp(40): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\carles\documents\github\pinball\pinball\modulephysics.cpp(367): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\carles\documents\github\pinball\pinball\modulephysics.cpp(368): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\carles\documents\github\pinball\pinball\modulephysics.cpp(411): warning C4018: '<': no coinciden signed/unsigned
+c:\users\carles\documents\github\pinball\pinball\modulephysics.cpp(622): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\carles\documents\github\pinball\pinball\modulephysics.cpp(623): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\carles\documents\github\pinball\pinball\modulephysics.cpp(629): warning C4244: 'return': conversión de 'float32' a 'int'; posible pérdida de datos
+d:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\cmath(113): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
+  Generando código...
+  Omitiendo... (no se detectaron cambios relevantes)
+  ModuleSceneIntro.cpp
+  Application.cpp
+  SDL Game.vcxproj -> C:\Users\carles\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe
+  SDL Game.vcxproj -> C:\Users\carles\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.pdb (Partial PDB)

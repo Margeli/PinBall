@@ -26,8 +26,8 @@ bool ModulePlayer::Start()
 	
 	ball_tex = App->textures->Load("pinball/ball.png");
 	
-	player_ball = App->physics->CreateCircle(455,395, 10) ;
 	
+	setBall(455, 395, 0.5f);
 	setPusher();
 
 	return true;
@@ -85,3 +85,8 @@ update_status ModulePlayer::Update()
 
 
 
+void ModulePlayer::setBall(uint x, uint y, float restitution)
+{
+	player_ball = App->physics->CreateCircle(x, y, 10, restitution);
+
+}
