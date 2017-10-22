@@ -26,7 +26,7 @@ bool ModulePlayer::Start()
 	
 	ball_tex = App->textures->Load("pinball/ball.png");
 	
-	player_ball = App->physics->CreateCircle(455,395, 10) ;
+	player_ball = App->physics->CreateCircle(455,200, 10) ;
 	
 	setPusher();
 
@@ -44,8 +44,8 @@ bool ModulePlayer::CleanUp()
 
 void ModulePlayer::setPusher()
 {
-	pusher = App->physics->CreateRectangle(455, 416, 18, 100, b2_dynamicBody);
-	pusher_pivot = App->physics->CreateRectangle(455, 416, 18, 20, b2_staticBody);
+	pusher = App->physics->CreateRectangle(455, 415, 18, 80, b2_dynamicBody);
+	pusher_pivot = App->physics->CreateRectangle(455, 465, 18, 20, b2_staticBody);
 
 	b2PrismaticJointDef prismaticJointDef;
 
