@@ -10,8 +10,7 @@
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	ball_tex = NULL;
-	
+	ball_tex = left_flipper = right_flipper = pusher_ball = NULL;
 
 
 }
@@ -25,10 +24,15 @@ bool ModulePlayer::Start()
 	LOG("Loading ball");
 	
 	ball_tex = App->textures->Load("pinball/ball.png");
+	left_flipper = App->textures->Load("pinball/left_flipper.png");
+	right_flipper = App->textures->Load("pinball/right_flipper.png");
+	pusher_ball = App->textures->Load("pinball/pusher_ball.png");
 	
 	
 	setBall(455, 395, 0.5f);
 	setPusher();
+	setLeftFlipper();
+	setRightFlipper();
 
 	return true;
 }
@@ -42,8 +46,47 @@ bool ModulePlayer::CleanUp()
 	return true;
 }
 
-void ModulePlayer::setPusher()
+
+
+// Update: draw background
+update_status ModulePlayer::Update()
 {
+
+	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+	{
+		R_Flipper_joint->EnableMotor(true);
+	}
+	 if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
+	{
+		R_Flipper_joint->EnableMotor(false);
+	}
+	 if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+	 {
+		 L_Flipper_joint->EnableMotor(true);
+	 }
+	 if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
+	 {
+		 L_Flipper_joint->EnableMotor(false);
+	 }
+
+	//Flippers Draw------
+	 
+	R_Flipper->GetPosition(position.x, position.y);
+	App->renderer->Blit(right_flipper, position.x, position.y, NULL, 1.0f, R_Flipper->GetRotation());
+
+	L_Flipper->GetPosition(position.x, position.y);
+	App->renderer->Blit(left_flipper, position.x, position.y, NULL, 1.0f, L_Flipper->GetRotation());
+	 
+	//Ball Draw--------------------
+	player_ball->GetPosition(position.x, position.y);
+	App->renderer->Blit(ball_tex, position.x, position.y, NULL, 1.0f, player_ball->GetRotation());
+
+
+	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::setPusher(){
+
 	pusher = App->physics->CreateRectangle(455, 416, 18, 100, b2_dynamicBody);
 	pusher_pivot = App->physics->CreateRectangle(455, 416, 18, 20, b2_staticBody);
 
@@ -64,26 +107,65 @@ void ModulePlayer::setPusher()
 	prismaticJointDef.enableMotor = true;
 	prismaticJointDef.maxMotorForce = 500;
 	prismaticJointDef.motorSpeed = 5000;
-	
+
 	pusherjoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&prismaticJointDef);
 }
 
+void ModulePlayer::setRightFlipper() {
 
-// Update: draw background
-update_status ModulePlayer::Update()
-{
+	R_Flipper = App->physics->CreateRectangle(310, 752, 80, 18);//210 741
+	R_Flipper_pivot = App->physics->CreateCircle(310, 752, 9, 0.0f, b2_staticBody);
 
-	//Ball Draw--------------------
-	player_ball->GetPosition(position.x, position.y);
+	b2RevoluteJointDef revoluteJointDef;
+
+	revoluteJointDef.bodyA = R_Flipper->body;
+	revoluteJointDef.bodyB = R_Flipper_pivot->body;
+	R_Flipper->body->SetGravityScale(30.0f);
 
 
-	App->renderer->Blit(ball_tex, position.x, position.y, NULL, 1.0f, player_ball->GetRotation());
+	revoluteJointDef.localAnchorA.Set(PIXEL_TO_METERS(30), 0);			
+	revoluteJointDef.localAnchorB.Set(0, 0);						
+	revoluteJointDef.collideConnected = false;
 
+	revoluteJointDef.enableLimit = true;						
+	revoluteJointDef.upperAngle = 35 * DEGTORAD;
+	revoluteJointDef.lowerAngle =-30 * DEGTORAD;
+	
+	revoluteJointDef.motorSpeed = -2000.0f * DEGTORAD;		
+	revoluteJointDef.maxMotorTorque = 1500.0f;
+	revoluteJointDef.enableMotor = false;
 
-	return UPDATE_CONTINUE;
+	R_Flipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&revoluteJointDef);
 }
+void ModulePlayer::setLeftFlipper() {
+
+	L_Flipper = App->physics->CreateRectangle(157, 752, 80, 18);//210 741
+	L_Flipper_pivot = App->physics->CreateCircle(157, 752, 9, 0.0f, b2_staticBody);
+
+	b2RevoluteJointDef revoluteJointDef;
+
+	revoluteJointDef.bodyA = L_Flipper->body;
+	revoluteJointDef.bodyB = L_Flipper_pivot->body;
+	L_Flipper->body->SetGravityScale(30.0f);
 
 
+	revoluteJointDef.localAnchorA.Set(PIXEL_TO_METERS(-30), 0);
+	revoluteJointDef.localAnchorB.Set(0, 0);
+	revoluteJointDef.collideConnected = false;
+
+	revoluteJointDef.enableLimit = true;
+	revoluteJointDef.upperAngle = 35 * DEGTORAD;
+	revoluteJointDef.lowerAngle = -30 * DEGTORAD;
+
+	revoluteJointDef.motorSpeed = 2000.0f * DEGTORAD;
+	revoluteJointDef.maxMotorTorque = 1500.0f;
+	revoluteJointDef.enableMotor = false;
+
+	L_Flipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&revoluteJointDef);
+
+
+
+}
 
 void ModulePlayer::setBall(uint x, uint y, float restitution)
 {

@@ -22,20 +22,31 @@ public:
 	iPoint position;
 	
 private:
-	void setFlippers();
+	void setRightFlipper();
+	void setLeftFlipper();
 	void setPusher();
 	void setBall(uint x, uint y, float restitution);
 
 
 public: 
 
-	PhysBody* player_ball;
 	SDL_Texture* ball_tex;
+	SDL_Texture* left_flipper;
+	SDL_Texture* right_flipper;
+	SDL_Texture* pusher_ball;
 	
 
 private:
+
+	PhysBody* player_ball;
 	PhysBody* pusher;
 	PhysBody* pusher_pivot;
+	PhysBody* L_Flipper;
+	PhysBody* L_Flipper_pivot;
+	PhysBody* R_Flipper;
+	PhysBody* R_Flipper_pivot;
 
 	b2PrismaticJoint* pusherjoint;
+	b2RevoluteJoint* R_Flipper_joint;
+	b2RevoluteJoint* L_Flipper_joint;
 };

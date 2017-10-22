@@ -25,6 +25,17 @@ public:
 	p2List<PhysBody*> ricks;*/
 	PhysBody* leftflipper;
 	PhysBody* rightflipper;
+
+	void PinballGround();
+	PhysBody* bg_big_chain;
+	PhysBody* bg_tl_triangle;
+	PhysBody* bg_tr_triangle;
+	PhysBody* bg_lr_triangle;
+	PhysBody* bg_br_triangle;
+	PhysBody* bg_bl_stick;
+	PhysBody* bg_br_stick;
+	PhysBody* bg_tl_stick;
+	PhysBody* bg_tr_stick;
 	
 
 	PhysBody* sensor;
@@ -33,13 +44,11 @@ public:
 	Animation* current_animpusher = nullptr;
 	Animation anim_pusher;
 	SDL_Texture* spritesheet;
-	SDL_Texture* left_flipper;
-	SDL_Texture* right_flipper;
-	SDL_Texture* pusher_ball;
+	
 	SDL_Texture* map_tex;
-	SDL_Texture* circle;
+	/*SDL_Texture* circle;
 	SDL_Texture* box;
-	SDL_Texture* rick;
+	SDL_Texture* rick;*/
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
