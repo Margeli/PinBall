@@ -299,5 +299,3 @@ __pycache__/
 *.xsd.cs
 *.ilk
 *.tlog
-*.obj
-*.tlog

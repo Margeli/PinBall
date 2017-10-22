@@ -24,7 +24,6 @@ public:
 private:
 	void setFlippers();
 	void setPusher();
-	void setBall(uint x, uint y, float restitution);
 
 
 public: 
