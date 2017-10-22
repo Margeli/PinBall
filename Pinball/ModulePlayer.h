@@ -19,6 +19,10 @@ public:
 	bool CleanUp();
 
 	iPoint position;
+	
+private:
+	void setFlippers();
+	void setPusher();
 
 
 public: 
@@ -27,6 +31,7 @@ public:
 	SDL_Texture* ball_tex;
 	
 
-
-
+private:
+	PhysBody* pusher;
+	PhysBody* pusher_pivot;
 };

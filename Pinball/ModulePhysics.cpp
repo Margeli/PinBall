@@ -298,8 +298,7 @@ bool ModulePhysics::Start()
 		361, 144
 	};
 	bg_tr_stick = CreateChain(0, 0, bg_tr_stick_pos, 43, b2_staticBody);
-	rectangle_joint = App->physics->CreateRectangle(455, 416, 18, 20);
-
+	
 	return true;
 }
 
@@ -345,7 +344,7 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2BodyType type)
 {
 	b2BodyDef body;
 	body.type = b2_dynamicBody;
@@ -528,14 +527,7 @@ update_status ModulePhysics::PostUpdate()
 			// test if the current body contains mouse position
 		}
 	}
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	{
-   		b2PrismaticJointDef pusher;
-		pusher.bodyA = bg_big_chain->body;
-		pusher.bodyB = rectangle_joint->body;
-		pusher.enableLimit = true;
-	}
-
+	
 	// If a body was selected we will attach a mouse joint to it
 	// so we can pull it around
 	// TODO 2: If a body was selected, create a mouse joint
@@ -651,4 +643,10 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 
 	if(physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
+}
+
+//We have to call it in scene intro and add here the chains
+void PinballGround()
+{
+
 }
