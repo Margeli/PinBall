@@ -45,6 +45,7 @@ bool ModuleSceneIntro::Start()
 	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
+	AddBouncers();
 		
 	return ret;
 }
@@ -141,6 +142,13 @@ update_status ModuleSceneIntro::Update()
 	return UPDATE_CONTINUE;
 
 
+}
+
+
+void ModuleSceneIntro::AddBouncers()
+{
+
+		bouncers.add(App->physics->CreateCircle(198, 257, 27, 2.0f, b2_staticBody));
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
