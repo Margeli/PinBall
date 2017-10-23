@@ -28,7 +28,7 @@ bool ModulePlayer::Start()
 	right_flipper = App->textures->Load("pinball/right_flipper.png");
 	pusher_ball = App->textures->Load("pinball/pusher_ball.png");
 	
-	setBall(455, 395, 0.5f);
+	setBall(455, 365, 0.5f);
 	setPusher();
 	setLeftFlipper();
 	setRightFlipper();
@@ -137,8 +137,9 @@ void ModulePlayer::setRightFlipper() {
 
 	revoluteJointDef.bodyA = R_Flipper->body;
 	revoluteJointDef.bodyB = R_Flipper_pivot->body;
-	R_Flipper->body->SetGravityScale(30.0f);
-
+	
+	R_Flipper->body->SetGravityScale(10.0f);
+	
 
 	revoluteJointDef.localAnchorA.Set(PIXEL_TO_METERS(30), 0);			
 	revoluteJointDef.localAnchorB.Set(0, 0);						
@@ -163,7 +164,7 @@ void ModulePlayer::setLeftFlipper() {
 
 	revoluteJointDef.bodyA = L_Flipper->body;
 	revoluteJointDef.bodyB = L_Flipper_pivot->body;
-	L_Flipper->body->SetGravityScale(30.0f);
+	L_Flipper->body->SetGravityScale(10.0f);
 
 
 	revoluteJointDef.localAnchorA.Set(PIXEL_TO_METERS(-30), 0);
@@ -186,6 +187,6 @@ void ModulePlayer::setLeftFlipper() {
 
 void ModulePlayer::setBall(uint x, uint y, float restitution)
 {
-	player_ball = App->physics->CreateCircle(x, y, 10, restitution);
+	player_ball = App->physics->CreateCircle(x, y, 10, restitution, b2_dynamicBody, true);
 	player_ball->listener = this; //calls OnCollision function
 }
