@@ -41,7 +41,9 @@ bool ModuleSceneIntro::Start()
 	
 	map_tex = App->textures->Load("pinball/background.png");
 
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+	bonus_fx = App->audio->LoadFx("pinball/audio/bonus.wav");
+
+	bounce_fx = App->audio->LoadFx("pinball/audio/bouncer.wav");
 	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
@@ -179,22 +181,13 @@ void ModuleSceneIntro::AddBouncers()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	int x, y;
-
+	/*if (bodyA == bouncers.find(0) || bodyB == bouncers.find())
+	{
+		App->audio->PlayFx(bounce_fx);
+	}
+	else*/
 	App->audio->PlayFx(bonus_fx);
 
-	/*
-	if(bodyA)
-	{
-		bodyA->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}
-
-	if(bodyB)
-	{
-		bodyB->GetPosition(x, y);
-		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
-	}*/
 }
 //We have to call it in scene intro and add here the chains
 void ModuleSceneIntro::PinballGround()
