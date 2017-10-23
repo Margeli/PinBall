@@ -122,7 +122,7 @@ void ModulePlayer::setPusher(){
 	prismaticJointDef.lowerTranslation = 0;
 	prismaticJointDef.upperTranslation = PIXEL_TO_METERS(50);
 	prismaticJointDef.enableMotor = false;
-	prismaticJointDef.maxMotorForce = 500;
+	prismaticJointDef.maxMotorForce = 200;
 	prismaticJointDef.motorSpeed = 5000;
 
 	pusherjoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&prismaticJointDef);
