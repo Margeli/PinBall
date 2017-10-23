@@ -147,8 +147,34 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::AddBouncers()
 {
+	//Top left green	
+	bouncers.add(App->physics->CreateCircle(100, 55, 20, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(135, 45, 20, 0.8f, b2_staticBody));
 
-		bouncers.add(App->physics->CreateCircle(198, 257, 27, 2.0f, b2_staticBody));
+	//Top right green	
+	bouncers.add(App->physics->CreateCircle(333, 48, 20, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(366, 58, 20, 0.8f, b2_staticBody));
+	
+	//Top centre red	
+	bouncers.add(App->physics->CreateCircle(204, 109, 12, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(235, 109, 12, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(265, 109, 12, 0.8f, b2_staticBody));
+
+	//Mid left green	
+	bouncers.add(App->physics->CreateCircle(142, 320, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(175, 305, 15, 0.8f, b2_staticBody));
+
+	//Mid right green	
+	bouncers.add(App->physics->CreateCircle(295, 305, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(326, 319, 15, 0.8f, b2_staticBody));
+
+	//Bottom left red
+	bouncers.add(App->physics->CreateCircle(45, 417, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(56, 384, 15, 0.8f, b2_staticBody));
+
+	//Bottom right red
+	bouncers.add(App->physics->CreateCircle(411, 383, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(420, 415, 15, 0.8f, b2_staticBody));
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
