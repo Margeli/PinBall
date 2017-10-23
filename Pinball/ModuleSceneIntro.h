@@ -20,9 +20,7 @@ public:
 
 public:
 	PhysBody* maps;
-	/*p2List<PhysBody*> circles;
-	p2List<PhysBody*> boxes;
-	p2List<PhysBody*> ricks;*/
+	p2List<PhysBody*> bouncers;
 	PhysBody* leftflipper;
 	PhysBody* rightflipper;
 
@@ -36,7 +34,6 @@ public:
 	PhysBody* bg_br_stick;
 	PhysBody* bg_tl_stick;
 	PhysBody* bg_tr_stick;
-	
 
 	PhysBody* sensor;
 	bool sensed;
@@ -52,4 +49,6 @@ public:
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
+private:
+	void AddBouncers();
 };
