@@ -30,7 +30,6 @@ bool ModulePlayer::Start()
 	setPusher();
 	setLeftFlipper();
 	setRightFlipper();
-	lives = 3;
 	return true;
 }
 // Unload assets
