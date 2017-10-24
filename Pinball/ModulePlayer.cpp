@@ -109,7 +109,7 @@ void ModulePlayer::OnCollision(PhysBody * body_A, PhysBody * body_B)
 		}	
 	}
 	
-	////App->audio->PlayFx(App->scene_intro->bonus_fx);
+	App->audio->PlayFx(App->scene_intro->bonus_fx);
 }
 
 
