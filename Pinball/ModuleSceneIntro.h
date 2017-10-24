@@ -49,6 +49,7 @@ public:
 	
 	PhysBody* dead_sensor;
 
+	bool dead = false;
 	bool sensed;
 	
 	Animation* current_animpusher = nullptr;

@@ -23,7 +23,7 @@ public:
 
 	iPoint position;
 	uint score;
-	int lives = 1;
+	uint lives ;
 private:
 	void OnCollision(PhysBody * bodyA, PhysBody * bodyB);
 	void setRightFlipper();
