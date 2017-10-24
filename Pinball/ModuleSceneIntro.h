@@ -54,6 +54,7 @@ public:
 	
 	Animation* current_animpusher = nullptr;
 	Animation anim_pusher;
+	Animation idle_pusher;
 	SDL_Texture* spritesheet;
 	SDL_Texture* R_GreenLight;
 	SDL_Texture* L_GreenLight;

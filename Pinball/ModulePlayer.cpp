@@ -69,10 +69,13 @@ update_status ModulePlayer::Update()
 
 	 if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 	 {
+		 App->scene_intro->current_animpusher = &App->scene_intro->anim_pusher;
 		 pusherjoint->EnableMotor(true);
 	 }
-	 if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+   	 if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 	 {
+		 App->scene_intro->anim_pusher.Reset();
+		 App->scene_intro->current_animpusher = &App->scene_intro->idle_pusher;
 		 pusherjoint->EnableMotor(false);
 
 	 }
