@@ -151,41 +151,56 @@ void ModuleSceneIntro::AddBouncers()
 {
 	//Top left green	
 	bouncers.add(App->physics->CreateCircle(100, 55, 20, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(135, 45, 20, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 
 	//Top right green	
 	bouncers.add(App->physics->CreateCircle(333, 48, 20, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(366, 58, 20, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 	
 	//Top centre red	
 	bouncers.add(App->physics->CreateCircle(204, 109, 12, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(235, 109, 12, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(265, 109, 12, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 
 	//Mid left green	
 	bouncers.add(App->physics->CreateCircle(142, 320, 15, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(175, 305, 15, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 
 	//Mid right green	
 	bouncers.add(App->physics->CreateCircle(295, 305, 15, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(326, 319, 15, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 
 	//Bottom left red
 	bouncers.add(App->physics->CreateCircle(45, 417, 15, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(56, 384, 15, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 
 	//Bottom right red
 	bouncers.add(App->physics->CreateCircle(411, 383, 15, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(420, 415, 15, 0.8f, b2_staticBody));
+	bouncers.getLast()->data->listener = this;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	/*if (bodyA == bouncers.find(0) || bodyB == bouncers.find())
+	if (bouncers.find(bodyA) != -1 || bouncers.find(bodyB) != -1)
 	{
 		App->audio->PlayFx(bounce_fx);
 	}
-	else*/
+	else
 	App->audio->PlayFx(bonus_fx);
 
 }
