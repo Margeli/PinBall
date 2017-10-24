@@ -5,6 +5,7 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModulePlayer.h"
 
 #include "ModulePhysics.h"
 #include"Animation.h"
@@ -29,6 +30,7 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 	//Pinball ground that ball can't go outside
 	PinballGround();
+	setScores();
 
 	anim_pusher.PushBack({ 0,0, 19, 103 });
 	anim_pusher.PushBack({ 24,0, 19, 103 });
@@ -37,13 +39,13 @@ bool ModuleSceneIntro::Start()
 	anim_pusher.PushBack({ 0,0, 19, 103 });
 	anim_pusher.speed = 0.05f;
 	
-	spritesheet = App->textures->Load("pinball/Pinballthings.png");
+	spritesheet = App->textures->Load("Assets/textures/Pinballthings.png");
 	
-	map_tex = App->textures->Load("pinball/background.png");
+	map_tex = App->textures->Load("Assets/textures/background.png");
 
-	bonus_fx = App->audio->LoadFx("pinball/audio/bonus.wav");
+	bonus_fx = App->audio->LoadFx("Assets/textures/audio/bonus.wav");
 
-	bounce_fx = App->audio->LoadFx("pinball/audio/bouncer.wav");
+	bounce_fx = App->audio->LoadFx("Assets/textures/audio/bouncer.wav");
 	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
@@ -202,6 +204,61 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	App->audio->PlayFx(bonus_fx);
 
 }
+
+void ModuleSceneIntro::setScores() {
+
+	App->player->score = 0;
+
+
+	//Top left green	
+	sensors.add(App->physics->CreateCircleSensor(100, 55, 22));
+	sensors.getLast()->data->listener = this;
+	sensors.add(App->physics->CreateCircleSensor(135, 45, 22));
+	sensors.getLast()->data->listener = this;
+
+	//Top right green	
+	sensors.add(App->physics->CreateCircleSensor(333, 48, 22));
+	sensors.getLast()->data->listener = this;
+	sensors.add(App->physics->CreateCircleSensor(366, 58, 22));
+	sensors.getLast()->data->listener = this;
+
+	//Top centre red	
+	sensors.add(App->physics->CreateCircleSensor(204, 109, 14));
+	sensors.getLast()->data->listener = this;
+	sensors.add(App->physics->CreateCircleSensor(235, 109, 14));
+	sensors.getLast()->data->listener = this;
+	sensors.add(App->physics->CreateCircleSensor(265, 109, 14));
+	sensors.getLast()->data->listener = this;
+
+	//Mid left green	
+	sensors.add(App->physics->CreateCircleSensor(142, 320, 17));
+	sensors.getLast()->data->listener = this;
+	sensors.add(App->physics->CreateCircleSensor(175, 305, 17));
+	sensors.getLast()->data->listener = this;
+
+	//Mid right green	
+	sensors.add(App->physics->CreateCircleSensor(295, 305, 17));
+	sensors.getLast()->data->listener = this;
+	sensors.add(App->physics->CreateCircleSensor(326, 319, 17));
+	sensors.getLast()->data->listener = this;
+
+	//Bottom left red
+	sensors.add(App->physics->CreateCircleSensor(45, 417, 17));
+	sensors.getLast()->data->listener = this;
+	sensors.add(App->physics->CreateCircleSensor(56, 384, 17));
+	sensors.getLast()->data->listener = this;
+
+	//Bottom right red
+	sensors.add(App->physics->CreateCircleSensor(411, 383, 17));
+	sensors.getLast()->data->listener = this;
+	sensors.add(App->physics->CreateCircleSensor(420, 415, 17));
+	sensors.getLast()->data->listener = this;
+
+
+
+}
+
+
 //We have to call it in scene intro and add here the chains
 void ModuleSceneIntro::PinballGround()
 {

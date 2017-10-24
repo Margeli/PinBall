@@ -20,6 +20,7 @@ public:
 	bool CleanUp();
 
 	iPoint position;
+	uint score;
 	
 private:
 	void OnCollision(PhysBody * bodyA, PhysBody * bodyB);
