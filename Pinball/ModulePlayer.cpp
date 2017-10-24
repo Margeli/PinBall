@@ -23,10 +23,10 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading ball");
 	
-	ball_tex = App->textures->Load("pinball/ball.png");
-	left_flipper = App->textures->Load("pinball/left_flipper.png");
-	right_flipper = App->textures->Load("pinball/right_flipper.png");
-	pusher_ball = App->textures->Load("pinball/pusher_ball.png");
+	ball_tex = App->textures->Load("Assets/textures/ball.png");
+	left_flipper = App->textures->Load("Assets/textures/left_flipper.png");
+	right_flipper = App->textures->Load("Assets/textures/right_flipper.png");
+	pusher_ball = App->textures->Load("Assets/textures/pusher_ball.png");
 	
 	setBall(455, 365, 0.5f);
 	setPusher();

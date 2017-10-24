@@ -21,10 +21,13 @@ public:
 public:
 	PhysBody* maps;
 	p2List<PhysBody*> bouncers;
+	p2List<PhysBody*> sensors;
+	
 	PhysBody* leftflipper;
 	PhysBody* rightflipper;
 
 	void PinballGround();
+	void setScores();
 	PhysBody* bg_big_chain;
 	PhysBody* bg_tl_triangle;
 	PhysBody* bg_tr_triangle;
