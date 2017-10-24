@@ -58,6 +58,7 @@ bool ModuleSceneIntro::Start()
 
 	loose_ball_fx = App->audio->LoadFx("Assets/audio/loose_ball.wav");
 
+
 	
 	L_RedLight = App->textures->Load("Assets/textures/left_redshine.png");
 
@@ -66,7 +67,11 @@ bool ModuleSceneIntro::Start()
 	M_RedLight = App->textures->Load("Assets/textures/central_redshine.png");
 
 
-	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+
+	loose_fx = App->audio->LoadFx("Assets/audio/loose_ball.wav");
+	
+	dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+
 
 	AddBouncers();
 		
@@ -172,12 +177,17 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::PlayerLives()
 {
-	if (App->player->position.y > 830)
+	if (App->player->position.y > 800)
 	{
-		App->audio->PlayFx(loose_ball_fx);
-		if (App->player->lives != 0)
+		App->player->lives--;
+		if (App->player->lives > 0)
 		{
+			App->audio->PlayFx(loose_ball_fx);
 			App->player->player_ball->body->SetTransform({ PIXEL_TO_METERS(PLAYER_POS_X),PIXEL_TO_METERS(PLAYER_POS_Y) }, 0);
+		}
+		else
+		{
+			App->audio->PlayFx(loose_fx);
 		}
 	}
 }
@@ -228,13 +238,7 @@ void ModuleSceneIntro::AddBouncers()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if (bouncers.find(bodyA) != -1 || bouncers.find(bodyB) != -1)
-	{
-		App->audio->PlayFx(bounce_fx);
-	}
-	else
-	App->audio->PlayFx(bonus_fx);
-
+	
 }
 
 void ModuleSceneIntro::setScores() {

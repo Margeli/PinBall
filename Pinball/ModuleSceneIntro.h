@@ -47,7 +47,8 @@ public:
 	PhysBody* leftflipper;
 	PhysBody* rightflipper;
 	
-	PhysBody* sensor;
+	PhysBody* dead_sensor;
+
 	bool sensed;
 	
 	Animation* current_animpusher = nullptr;
@@ -65,6 +66,7 @@ public:
 	uint bonus_fx;
 	uint bounce_fx;
 	uint loose_ball_fx;
+	uint loose_fx;
 
 	p2Point<int> ray;
 	bool ray_on;
