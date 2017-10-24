@@ -1,16 +1,3 @@
-﻿  ModuleSceneIntro.cpp
-<<<<<<< HEAD
-d:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
-  SDL Game.vcxproj -> C:\Users\carles\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe
-  SDL Game.vcxproj -> C:\Users\carles\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.pdb (Partial PDB)
-=======
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
-  Generando código...
-  Compilando...
-  ModulePlayer.cpp
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
-  Application.cpp
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: si se usa 'noexcept' sin ningún modo de control de excepciones especificado, la finalización de la excepción no está garantizada. Especifique /EHsc
-  Generando código...
-  SDL Game.vcxproj -> C:\Users\Norman-PC\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe
->>>>>>> origin/master
+﻿  LINK : no se encontró C:\Users\Norman-PC\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+ModuleFonts.obj : error LNK2019: símbolo externo "public: void __thiscall ModuleTextures::GetSize(struct SDL_Texture const *,unsigned int &,unsigned int &)const " (?GetSize@ModuleTextures@@QBEXPBUSDL_Texture@@AAI1@Z) sin resolver al que se hace referencia en la función "public: int __thiscall ModuleFonts::Load(char const *,char const *,unsigned int)" (?Load@ModuleFonts@@QAEHPBD0I@Z)
+C:\Users\Norman-PC\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe : fatal error LNK1120: 1 externos sin resolver
