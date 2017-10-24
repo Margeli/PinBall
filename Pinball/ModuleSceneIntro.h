@@ -24,7 +24,6 @@ enum SensorLight {
 		RED_LEFTRIGHT,
 		RED_RIGHTLEFT,
 		RED_RIGHTRIGHT
-
 };
 
 
@@ -51,7 +50,7 @@ public:
 
 	bool dead = false;
 	bool sensed;
-	
+	int font_score = -1;
 	Animation* current_animpusher = nullptr;
 	Animation anim_pusher;
 	Animation idle_pusher;

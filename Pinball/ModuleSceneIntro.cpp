@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
+#include "ModuleFonts.h"
 
 #include "ModulePhysics.h"
 #include"Animation.h"
@@ -51,6 +52,9 @@ bool ModuleSceneIntro::Start()
 
 	bounce_fx = App->audio->LoadFx("Assets/audio/bouncer.wav");
 
+	loose_ball_fx = App->audio->LoadFx("Assets/audio/loose_ball.wav");
+
+	loose_fx = App->audio->LoadFx("Assets/audio/loose.wav");
 
 	L_BlueLight = App->textures->Load("Assets/textures/left_blueshine.png");
 
@@ -60,9 +64,6 @@ bool ModuleSceneIntro::Start()
 
 	R_GreenLight = App->textures->Load("Assets/textures/right_greenshine.png");
 
-	loose_ball_fx = App->audio->LoadFx("Assets/audio/loose_ball.wav");
-
-
 	
 	L_RedLight = App->textures->Load("Assets/textures/left_redshine.png");
 
@@ -70,15 +71,11 @@ bool ModuleSceneIntro::Start()
 
 	M_RedLight = App->textures->Load("Assets/textures/central_redshine.png");
 
-
-
-	loose_fx = App->audio->LoadFx("Assets/audio/loose_ball.wav");
 	
 	dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
-
-
 	AddBouncers();
-		
+	//Fonts
+	//font_score = App->fonts->Load("")
 	return ret;
 }
 
