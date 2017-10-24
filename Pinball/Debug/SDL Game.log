@@ -7,12 +7,12 @@ c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.1
   ModulePlayer.cpp
 c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
   ModulePhysics.cpp
-c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(121): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(122): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(165): warning C4018: '<': signed/unsigned mismatch
-c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(373): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(374): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\normanbg\documents\github\pinball\pinball\modulephysics.cpp(380): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
+c:\users\carlesma\documents\github\pinball\pinball\modulephysics.cpp(121): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\carlesma\documents\github\pinball\pinball\modulephysics.cpp(122): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\carlesma\documents\github\pinball\pinball\modulephysics.cpp(192): warning C4018: '<': signed/unsigned mismatch
+c:\users\carlesma\documents\github\pinball\pinball\modulephysics.cpp(400): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\carlesma\documents\github\pinball\pinball\modulephysics.cpp(401): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\carlesma\documents\github\pinball\pinball\modulephysics.cpp(407): warning C4244: 'return': conversion from 'float32' to 'int', possible loss of data
 c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\cmath(113): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
   ModuleInput.cpp
   ModuleAudio.cpp
@@ -20,6 +20,6 @@ c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.1
   Application.cpp
 c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.11.25503\include\limits(211): warning C4577: 'noexcept' used with no exception handling mode specified; termination on exception is not guaranteed. Specify /EHsc
   Generating Code...
-  LINK : C:\Users\normanbg\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe not found or not built by the last incremental link; performing full link
-  SDL Game.vcxproj -> C:\Users\normanbg\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe
-  SDL Game.vcxproj -> C:\Users\normanbg\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.pdb (Partial PDB)
+  LINK : C:\Users\carlesma\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe not found or not built by the last incremental link; performing full link
+  SDL Game.vcxproj -> C:\Users\carlesma\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.exe
+  SDL Game.vcxproj -> C:\Users\carlesma\Documents\GitHub\PinBall\Pinball\Debug\2D Physics - class 4.pdb (Partial PDB)

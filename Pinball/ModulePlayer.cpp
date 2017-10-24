@@ -97,6 +97,13 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(PhysBody * body_A, PhysBody * body_B)
 {
+	
+	/*for (b ) {
+	 if (body_B.)
+	
+	}
+	*/
+	
 	App->audio->PlayFx(App->scene_intro->bonus_fx);
 }
 

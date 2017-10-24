@@ -67,6 +67,7 @@ struct b2BodyDef
 		type = b2_staticBody;
 		active = true;
 		gravityScale = 1.0f;
+
 	}
 
 	/// The body type: static, kinematic, or dynamic.
