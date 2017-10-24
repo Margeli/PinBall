@@ -7,6 +7,27 @@
 
 class PhysBody;
 
+enum SensorLight {
+		NONE =-1,
+		BLUE_LEFTLEFT = 0,
+		BLUE_LEFTRIGHT,
+		BLUE_RIGHTLEFT,
+		BLUE_RIGHTRIGHT,
+		RED_CENTERLEFT,
+		RED_CENTERCENTER,
+		RED_CENTERRIGHT,
+		GREEN_LEFTLEFT,
+		GREEN_LEFTRIGHT,
+		GREEN_RIGHTLEFT,
+		GREEN_RIGHTRIGHT,
+		RED_LEFTLEFT,
+		RED_LEFTRIGHT,
+		RED_RIGHTLEFT,
+		RED_RIGHTRIGHT
+
+};
+
+
 class ModuleSceneIntro : public Module
 {
 public:
@@ -25,9 +46,55 @@ public:
 	
 	PhysBody* leftflipper;
 	PhysBody* rightflipper;
+	
+	PhysBody* sensor;
+	bool sensed;
+	
+	Animation* current_animpusher = nullptr;
+	Animation anim_pusher;
+	SDL_Texture* spritesheet;
+	SDL_Texture* R_GreenLight;
+	SDL_Texture* L_GreenLight;
+	SDL_Texture* R_BlueLight;
+	SDL_Texture* L_BlueLight;
+	SDL_Texture* R_RedLight;
+	SDL_Texture* L_RedLight;
+	SDL_Texture* M_RedLight;
+
+	SDL_Texture* map_tex;
+	/*SDL_Texture* circle;
+	SDL_Texture* box;
+	SDL_Texture* rick;*/
+	uint bonus_fx;
+	uint bounce_fx;
+	p2Point<int> ray;
+	bool ray_on;
+
+private:
 
 	void PinballGround();
-	void setScores();
+	void setScores(); 
+
+	bool bll = false;// BOOLS XYZ --------
+	bool blr = false;//		X	r >> red
+	bool brl = false;//			g >> green
+	bool brr = false;//			b >> blue
+
+	bool rll = false;//		YZ	l >> left
+	bool rlr = false;//			r >> right
+	bool rrl = false;//			m >> middle
+	bool rrr = false;
+
+	bool rml = false; 
+	bool rmr = false;
+	bool rmm = false;
+
+	bool gll = false; 
+	bool glr = false;
+	bool grl = false;
+	bool grr = false;//------------------
+
+
 	PhysBody* bg_big_chain;
 	PhysBody* bg_tl_triangle;
 	PhysBody* bg_tr_triangle;
@@ -38,21 +105,6 @@ public:
 	PhysBody* bg_tl_stick;
 	PhysBody* bg_tr_stick;
 
-	PhysBody* sensor;
-	bool sensed;
-	
-	Animation* current_animpusher = nullptr;
-	Animation anim_pusher;
-	SDL_Texture* spritesheet;
-	
-	SDL_Texture* map_tex;
-	/*SDL_Texture* circle;
-	SDL_Texture* box;
-	SDL_Texture* rick;*/
-	uint bonus_fx;
-	uint bounce_fx;
-	p2Point<int> ray;
-	bool ray_on;
-private:
 	void AddBouncers();
+	void UpdateSensors();
 };

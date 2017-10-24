@@ -43,10 +43,25 @@ bool ModuleSceneIntro::Start()
 	
 	map_tex = App->textures->Load("Assets/textures/background.png");
 
-	bonus_fx = App->audio->LoadFx("Assets/textures/audio/bonus.wav");
+	bonus_fx = App->audio->LoadFx("Assets/audio/bonus.wav");
 
-	bounce_fx = App->audio->LoadFx("Assets/textures/audio/bouncer.wav");
+	bounce_fx = App->audio->LoadFx("Assets/audio/bouncer.wav");
+
+	L_BlueLight = App->textures->Load("Assets/textures/left_blueshine.png");
+
+	R_BlueLight = App->textures->Load("Assets/textures/right_blueshine.png");
+
+	L_GreenLight = App->textures->Load("Assets/textures/left_greenshine.png");
+
+	R_GreenLight = App->textures->Load("Assets/textures/right_greenshine.png");
 	
+	L_RedLight = App->textures->Load("Assets/textures/left_redshine.png");
+
+	R_RedLight = App->textures->Load("Assets/textures/right_redshine.png");
+
+	M_RedLight = App->textures->Load("Assets/textures/central_redshine.png");
+
+
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
 	AddBouncers();
@@ -70,7 +85,8 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(map_tex, 0, 0, NULL, 1.0f);
 	}
 	
-
+	UpdateSensors();
+	
 	
 	/*
 
@@ -151,13 +167,13 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::AddBouncers()
 {
-	//Top left green	
+	//Top left blue	
 	bouncers.add(App->physics->CreateCircle(100, 55, 20, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(135, 45, 20, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
 
-	//Top right green	
+	//Top right blue	
 	bouncers.add(App->physics->CreateCircle(333, 48, 20, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(366, 58, 20, 0.8f, b2_staticBody));
@@ -210,54 +226,143 @@ void ModuleSceneIntro::setScores() {
 	App->player->score = 0;
 
 
-	//Top left green	
-	sensors.add(App->physics->CreateCircleSensor(100, 55, 22));
+	//Top left blue	
+	sensors.add(App->physics->CreateCircleSensor(100, 55, 22, BLUE_LEFTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(135, 45, 22));
+	sensors.add(App->physics->CreateCircleSensor(135, 45, 22, BLUE_LEFTRIGHT));
 	sensors.getLast()->data->listener = this;
 
-	//Top right green	
-	sensors.add(App->physics->CreateCircleSensor(333, 48, 22));
+	//Top right blue	
+	sensors.add(App->physics->CreateCircleSensor(333, 48, 22, BLUE_RIGHTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(366, 58, 22));
+	sensors.add(App->physics->CreateCircleSensor(366, 58, 22, BLUE_RIGHTRIGHT));
 	sensors.getLast()->data->listener = this;
 
 	//Top centre red	
-	sensors.add(App->physics->CreateCircleSensor(204, 109, 14));
+	sensors.add(App->physics->CreateCircleSensor(204, 109, 14, RED_CENTERLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(235, 109, 14));
+	sensors.add(App->physics->CreateCircleSensor(235, 109, 14, RED_CENTERCENTER));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(265, 109, 14));
+	sensors.add(App->physics->CreateCircleSensor(265, 109, 14, RED_CENTERRIGHT));
 	sensors.getLast()->data->listener = this;
 
 	//Mid left green	
-	sensors.add(App->physics->CreateCircleSensor(142, 320, 17));
+	sensors.add(App->physics->CreateCircleSensor(142, 320, 17, GREEN_LEFTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(175, 305, 17));
+	sensors.add(App->physics->CreateCircleSensor(175, 305, 17, GREEN_LEFTRIGHT));
 	sensors.getLast()->data->listener = this;
-
+	
 	//Mid right green	
-	sensors.add(App->physics->CreateCircleSensor(295, 305, 17));
+	sensors.add(App->physics->CreateCircleSensor(295, 305, 17, GREEN_RIGHTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(326, 319, 17));
+	sensors.add(App->physics->CreateCircleSensor(326, 319, 17, GREEN_RIGHTRIGHT));
 	sensors.getLast()->data->listener = this;
 
 	//Bottom left red
-	sensors.add(App->physics->CreateCircleSensor(45, 417, 17));
+	sensors.add(App->physics->CreateCircleSensor(45, 417, 17, RED_LEFTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(56, 384, 17));
+	sensors.add(App->physics->CreateCircleSensor(56, 384, 17, RED_LEFTRIGHT));
 	sensors.getLast()->data->listener = this;
 
 	//Bottom right red
-	sensors.add(App->physics->CreateCircleSensor(411, 383, 17));
+	sensors.add(App->physics->CreateCircleSensor(411, 383, 17, RED_RIGHTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(420, 415, 17));
+	sensors.add(App->physics->CreateCircleSensor(420, 415, 17, RED_RIGHTRIGHT));
 	sensors.getLast()->data->listener = this;
-
-
 
 }
 
+void ModuleSceneIntro::UpdateSensors() {
+
+	p2List_item<PhysBody*>* sensor;
+	sensor = sensors.getFirst();
+
+	for (sensor; sensor != nullptr; sensor = sensor->next) {
+		if (sensor->data->active && sensor->data->Sensor_Light == BLUE_LEFTLEFT) {//BLUE---
+			bll = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == BLUE_LEFTRIGHT) {
+			blr = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == BLUE_RIGHTLEFT) {
+			brl = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == BLUE_RIGHTRIGHT) {
+			brr = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == RED_CENTERLEFT) { //RED---
+			rml = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == RED_CENTERCENTER) {
+			rmm = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == RED_CENTERRIGHT) {
+			rmr = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == RED_CENTERLEFT) {
+			rml = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == GREEN_LEFTLEFT) {//GREEN---
+			gll = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == GREEN_LEFTRIGHT) {
+			glr = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == GREEN_RIGHTLEFT) {
+			grl = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == GREEN_RIGHTRIGHT) {
+			grr = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == RED_LEFTLEFT) {//RED---
+			rll = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == RED_LEFTRIGHT) {
+			rlr = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == RED_RIGHTLEFT) {
+			rrl = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == RED_RIGHTRIGHT) {
+			rrr = true;
+			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+	}
+
+	if (bll) { App->renderer->Blit(L_BlueLight, 97, 82); }
+
+}
 
 //We have to call it in scene intro and add here the chains
 void ModuleSceneIntro::PinballGround()

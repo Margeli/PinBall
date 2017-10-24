@@ -12,6 +12,8 @@
 #define METERS_TO_PIXELS(m) ((int) floor(PIXELS_PER_METER * m))
 #define PIXEL_TO_METERS(p)  ((float) METER_PER_PIXEL * p)
 
+enum SensorLight;
+
 // Small class to return to other modules to track position and rotation of physics bodies
 class PhysBody
 {
@@ -24,6 +26,8 @@ public:
 	bool Contains(int x, int y) const;
 	bool active = false;
 	bool sensor = false;
+	SensorLight Sensor_Light;
+	 
 	int RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& normal_y) const;
 
 public:
@@ -48,7 +52,7 @@ public:
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type = b2_dynamicBody);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type);
-	PhysBody* CreateCircleSensor(int x, int y, int radius);
+	PhysBody* CreateCircleSensor(int x, int y, int radius, SensorLight Light);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

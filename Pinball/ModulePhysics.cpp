@@ -124,7 +124,7 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateCircleSensor(int x, int y, int radius) {
+PhysBody* ModulePhysics::CreateCircleSensor(int x, int y, int radius, SensorLight Light ) {
 
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -146,6 +146,7 @@ PhysBody* ModulePhysics::CreateCircleSensor(int x, int y, int radius) {
 	PhysBody* pbody = new PhysBody();
 	pbody->body = b;
 	pbody->sensor = true;
+	pbody->Sensor_Light = Light;
 	b->SetUserData(pbody);
 	pbody->width = pbody->height = radius;
 

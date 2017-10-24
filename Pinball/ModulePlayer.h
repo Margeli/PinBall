@@ -28,7 +28,7 @@ private:
 	void setLeftFlipper();
 	void setPusher();
 	void setBall(uint x, uint y, float restitution);
-
+	
 
 public: 
 

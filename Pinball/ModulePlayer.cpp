@@ -50,7 +50,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-
+	
 
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 	{
@@ -77,7 +77,7 @@ update_status ModulePlayer::Update()
 	 {
 		 pusherjoint->EnableMotor(false);
 	 }
-
+	 
 	 
 	//Flippers Draw------
 	 
@@ -98,13 +98,18 @@ update_status ModulePlayer::Update()
 void ModulePlayer::OnCollision(PhysBody * body_A, PhysBody * body_B)
 {
 	
-	/*for (b ) {
-	 if (body_B.)
-	
+	if (body_B->sensor) {
+		p2List_item<PhysBody*>* sensor;
+		sensor = App->scene_intro->sensors.getFirst();
+		
+		for (sensor; sensor != nullptr;sensor = sensor->next) {
+			if (sensor->data==body_B) {
+				sensor->data->active = true;					
+			}		
+		}	
 	}
-	*/
 	
-	App->audio->PlayFx(App->scene_intro->bonus_fx);
+	////App->audio->PlayFx(App->scene_intro->bonus_fx);
 }
 
 
