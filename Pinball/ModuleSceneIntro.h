@@ -46,13 +46,14 @@ public:
 	SDL_Texture* spritesheet;
 	
 	SDL_Texture* map_tex;
-	/*SDL_Texture* circle;
-	SDL_Texture* box;
-	SDL_Texture* rick;*/
 	uint bonus_fx;
 	uint bounce_fx;
+	uint loose_ball_fx;
+
 	p2Point<int> ray;
 	bool ray_on;
+
 private:
 	void AddBouncers();
+	void PlayerLives();
 };

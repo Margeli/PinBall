@@ -5,6 +5,8 @@
 #include "p2Point.h"
 #include "Box2D/Box2D/Box2D.h"
 
+#define PLAYER_POS_X 455
+#define PLAYER_POS_Y 365
 
 class PhysBody;
 struct SDL_Texture;
@@ -21,7 +23,7 @@ public:
 
 	iPoint position;
 	uint score;
-	
+	int lives = 0;
 private:
 	void OnCollision(PhysBody * bodyA, PhysBody * bodyB);
 	void setRightFlipper();
@@ -36,11 +38,10 @@ public:
 	SDL_Texture* left_flipper;
 	SDL_Texture* right_flipper;
 	SDL_Texture* pusher_ball;
-	
+	PhysBody* player_ball;
 
 private:
 
-	PhysBody* player_ball;
 	PhysBody* pusher;
 	PhysBody* pusher_pivot;
 	PhysBody* L_Flipper;

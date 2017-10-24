@@ -43,9 +43,11 @@ bool ModuleSceneIntro::Start()
 	
 	map_tex = App->textures->Load("Assets/textures/background.png");
 
-	bonus_fx = App->audio->LoadFx("Assets/textures/audio/bonus.wav");
+	bonus_fx = App->audio->LoadFx("Assets/audio/bonus.wav");
 
-	bounce_fx = App->audio->LoadFx("Assets/textures/audio/bouncer.wav");
+	bounce_fx = App->audio->LoadFx("Assets/audio/bouncer.wav");
+
+	loose_ball_fx = App->audio->LoadFx("Assets/audio/loose_ball.wav");
 	
 	sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
@@ -70,7 +72,7 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(map_tex, 0, 0, NULL, 1.0f);
 	}
 	
-
+	PlayerLives();
 	
 	/*
 
@@ -140,15 +142,23 @@ update_status ModuleSceneIntro::Update()
 		if(normal.x != 0.0f)
 			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
 	}*/
-	
-
-	
+		
 	return UPDATE_CONTINUE;
 
 
 }
 
-
+void ModuleSceneIntro::PlayerLives()
+{
+	if (App->player->position.y > 830)
+	{
+		App->audio->PlayFx(loose_ball_fx);
+		if (App->player->lives != 0)
+		{
+			App->player->player_ball->body->SetTransform({ PIXEL_TO_METERS(PLAYER_POS_X),PIXEL_TO_METERS(PLAYER_POS_Y) }, 0);
+		}
+	}
+}
 void ModuleSceneIntro::AddBouncers()
 {
 	//Top left green	
