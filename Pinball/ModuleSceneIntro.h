@@ -51,6 +51,7 @@ public:
 	bool dead = false;
 	bool sensed;
 	int font_score = -1;
+	char score_text[10];
 	Animation* current_animpusher = nullptr;
 	Animation anim_pusher;
 	SDL_Texture* spritesheet;

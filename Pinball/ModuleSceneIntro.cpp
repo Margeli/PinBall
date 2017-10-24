@@ -71,7 +71,7 @@ bool ModuleSceneIntro::Start()
 	dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 	AddBouncers();
 	//Fonts
-	//font_score = App->fonts->Load("")
+	font_score = App->fonts->Load("Assets/fonts/score_points_font.png", "01234.56789 ", 2);
 	return ret;
 }
 
@@ -80,6 +80,7 @@ bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
 
+	App->fonts->Unload(font_score);
 	return true;
 }
 
@@ -93,80 +94,11 @@ update_status ModuleSceneIntro::Update()
 	
 
 	UpdateSensors();
-	
-
 	PlayerLives();
-
-	
-	/*
-
-	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	if (App->scene_intro->IsEnabled())
 	{
-		ray_on = !ray_on;
-		ray.x = App->input->GetMouseX();
-		ray.y = App->input->GetMouseY();
+		App->fonts->BlitText(0, 5, font_score, score_text);
 	}
-	// Prepare for raycast ------------------------------------------------------
-	
-	iPoint mouse;
-	mouse.x = App->input->GetMouseX();
-	mouse.y = App->input->GetMouseY();
-	int ray_hit = ray.DistanceTo(mouse);
-
-	fVector normal(0.0f, 0.0f);
-
-	// All draw functions ------------------------------------------------------
-	/*p2List_item<PhysBody*>* c = circles.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		if(c->data->Contains(App->input->GetMouseX(), App->input->GetMouseY()))
-			App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}
-
-	c = boxes.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
-		if(ray_on)
-		{
-			int hit = c->data->RayCast(ray.x, ray.y, mouse.x, mouse.y, normal.x, normal.y);
-			if(hit >= 0)
-				ray_hit = hit;
-		}
-		c = c->next;
-	}
-
-	c = ricks.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}
-
-
-	// ray -----------------
-	if(ray_on == true)
-	{
-		fVector destination(mouse.x-ray.x, mouse.y-ray.y);
-		destination.Normalize();
-		destination *= ray_hit;
-
-		App->renderer->DrawLine(ray.x, ray.y, ray.x + destination.x, ray.y + destination.y, 255, 255, 255);
-
-		if(normal.x != 0.0f)
-			App->renderer->DrawLine(ray.x + destination.x, ray.y + destination.y, ray.x + destination.x + normal.x * 25.0f, ray.y + destination.y + normal.y * 25.0f, 100, 255, 100);
-	}*/
-		
 	return UPDATE_CONTINUE;
 
 
@@ -174,6 +106,11 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::PlayerLives()
 {
+	//We will use this to blit lives (balls)
+	/*for (int i = 0; i < App->player1->lives - 1; i++)
+	{
+		App->render->Blit(char_lives, 5 + ((char_pos.w + 2) * i), 20, &char_pos);
+	}*/
 	if ((App->player->position.y < 300) && (App->player->position.y > 100))
 	{
 		dead = false;	
