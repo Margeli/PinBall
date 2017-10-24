@@ -189,9 +189,7 @@ void ModuleSceneIntro::AddBouncers()
 
 	//Bottom right red
 	bouncers.add(App->physics->CreateCircle(411, 383, 15, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(420, 415, 15, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
