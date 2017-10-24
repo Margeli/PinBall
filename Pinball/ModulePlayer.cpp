@@ -20,6 +20,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading ball");
+	lives = 3;
 	
 	ball_tex = App->textures->Load("Assets/textures/ball.png");
 	left_flipper = App->textures->Load("Assets/textures/left_flipper.png");

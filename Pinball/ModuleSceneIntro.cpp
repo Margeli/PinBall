@@ -177,18 +177,25 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::PlayerLives()
 {
-	if (App->player->position.y > 800)
+	if ((App->player->position.y < 300) && (App->player->position.y > 100))
 	{
-		App->player->lives--;
-		if (App->player->lives > 0)
+		dead = false;	
+	}
+	if ((App->player->position.y >= 800) &&(!dead))
+	{
+		dead = true;
+		
+		App->player->lives-=1;
+		if (App->player->lives != 0) 
 		{
-			App->audio->PlayFx(loose_ball_fx);
 			App->player->player_ball->body->SetTransform({ PIXEL_TO_METERS(PLAYER_POS_X),PIXEL_TO_METERS(PLAYER_POS_Y) }, 0);
+			App->audio->PlayFx(loose_ball_fx);
 		}
-		else
+		if (App->player->lives == 0)
 		{
 			App->audio->PlayFx(loose_fx);
 		}
+
 	}
 }
 void ModuleSceneIntro::AddBouncers()
