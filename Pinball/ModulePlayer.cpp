@@ -11,8 +11,6 @@
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	ball_tex = left_flipper = right_flipper = pusher_ball = NULL;
-
-
 }
 
 ModulePlayer::~ModulePlayer()
@@ -28,11 +26,11 @@ bool ModulePlayer::Start()
 	right_flipper = App->textures->Load("Assets/textures/right_flipper.png");
 	pusher_ball = App->textures->Load("Assets/textures/pusher_ball.png");
 	
-	setBall(455, 365, 0.5f);
+	setBall(PLAYER_POS_X, PLAYER_POS_Y, 0.5f);
 	setPusher();
 	setLeftFlipper();
 	setRightFlipper();
-
+	lives = 3;
 	return true;
 }
 // Unload assets
@@ -76,8 +74,11 @@ update_status ModulePlayer::Update()
 	 if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 	 {
 		 pusherjoint->EnableMotor(false);
+
 	 }
 	 
+
+
 	 
 	//Flippers Draw------
 	 
@@ -90,7 +91,6 @@ update_status ModulePlayer::Update()
 	//Ball Draw--------------------
 	player_ball->GetPosition(position.x, position.y);
 	App->renderer->Blit(ball_tex, position.x, position.y, NULL, 1.0f, player_ball->GetRotation());
-
 
 	return UPDATE_CONTINUE;
 }
@@ -192,8 +192,6 @@ void ModulePlayer::setLeftFlipper() {
 	revoluteJointDef.enableMotor = false;
 
 	L_Flipper_joint = (b2RevoluteJoint*)App->physics->world->CreateJoint(&revoluteJointDef);
-
-
 
 }
 
