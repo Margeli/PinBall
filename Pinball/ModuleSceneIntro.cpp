@@ -33,12 +33,16 @@ bool ModuleSceneIntro::Start()
 	PinballGround();
 	setScores();
 
+	idle_pusher.PushBack({ 0,0, 19, 103 });
 	anim_pusher.PushBack({ 0,0, 19, 103 });
 	anim_pusher.PushBack({ 24,0, 19, 103 });
 	anim_pusher.PushBack({ 48,0, 19, 103 });
 	anim_pusher.PushBack({ 72,0, 19, 103 });
 	anim_pusher.PushBack({ 0,0, 19, 103 });
-	anim_pusher.speed = 0.05f;
+	anim_pusher.speed = 0.8f;
+	anim_pusher.loop = false;
+
+	current_animpusher = &idle_pusher;
 	
 	spritesheet = App->textures->Load("Assets/textures/Pinballthings.png");
 	
@@ -89,9 +93,10 @@ update_status ModuleSceneIntro::Update()
 {
 	if (map_tex != NULL)
 	{
+		
 		App->renderer->Blit(map_tex, 0, 0, NULL, 1.0f);
 	}
-	
+	App->renderer->Blit(spritesheet, 448, 414, &current_animpusher->GetCurrentFrame());
 
 	UpdateSensors();
 	PlayerLives();
@@ -235,6 +240,22 @@ void ModuleSceneIntro::setScores() {
 
 void ModuleSceneIntro::UpdateSensors() {
 
+	if (bll) { App->renderer->Blit(L_BlueLight, 96, 82); }
+	if (blr) { App->renderer->Blit(L_BlueLight, 122, 76); }
+	if (brl) { App->renderer->Blit(R_BlueLight, 73, 312); }
+	if (brr) { App->renderer->Blit(R_BlueLight, 81, 339); }
+	//else if (rml) { App->renderer->Blit(M_RedLight,  ; }
+	//else if (rmm) { App->renderer->Blit(M_RedLight,); }
+	//else if (rmr) { App->renderer->Blit(M_RedLight, ); }
+	if (gll) { App->renderer->Blit(L_GreenLight, 134, 334); }
+	if (glr) { App->renderer->Blit(L_GreenLight, 163, 322); }
+	if (grl) { App->renderer->Blit(R_GreenLight, 268, 323); }
+	if (grr) { App->renderer->Blit(R_GreenLight, 294, 335); }
+	if (rll) { App->renderer->Blit(L_RedLight, 63, 410); }
+	if (rlr) { App->renderer->Blit(L_RedLight, 73, 378); }
+	if (rrl) { App->renderer->Blit(R_RedLight, 375, 378); }
+	if (rrr) { App->renderer->Blit(R_RedLight, 385, 411); }
+
 	p2List_item<PhysBody*>* sensor;
 	sensor = sensors.getFirst();
 
@@ -273,12 +294,7 @@ void ModuleSceneIntro::UpdateSensors() {
 			rmr = true;
 			App->audio->PlayFx(bounce_fx);
 			sensor->data->active = false;
-		}
-		if (sensor->data->active && sensor->data->Sensor_Light == RED_CENTERLEFT) {
-			rml = true;
-			App->audio->PlayFx(bounce_fx);
-			sensor->data->active = false;
-		}
+		}		
 		if (sensor->data->active && sensor->data->Sensor_Light == GREEN_LEFTLEFT) {//GREEN---
 			gll = true;
 			App->audio->PlayFx(bounce_fx);
@@ -320,9 +336,7 @@ void ModuleSceneIntro::UpdateSensors() {
 			sensor->data->active = false;
 		}
 	}
-
-	if (bll) { App->renderer->Blit(L_BlueLight, 97, 82); }
-
+	
 }
 
 //We have to call it in scene intro and add here the chains
