@@ -51,7 +51,7 @@ public:
 	bool dead = false;
 	bool sensed;
 	int font_score = -1;
-	char score_text[10];
+	char* score_text[10];
 	Animation* current_animpusher = nullptr;
 	Animation anim_pusher;
 	Animation idle_pusher;
@@ -69,6 +69,7 @@ public:
 	uint bounce_fx;
 	uint loose_ball_fx;
 	uint loose_fx;
+	uint flipper_hit_fx;
 
 	p2Point<int> ray;
 	bool ray_on;

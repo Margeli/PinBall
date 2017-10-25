@@ -111,8 +111,12 @@ void ModulePlayer::OnCollision(PhysBody * body_A, PhysBody * body_B)
 			}		
 		}	
 	}
-	
-	App->audio->PlayFx(App->scene_intro->bonus_fx);
+	if ((body_B == L_Flipper || body_B == R_Flipper) && (R_Flipper_joint->IsMotorEnabled()|| L_Flipper_joint->IsMotorEnabled()))
+	{
+		App->audio->PlayFx(App->scene_intro->flipper_hit_fx);
+	}
+	else
+		App->audio->PlayFx(App->scene_intro->bonus_fx);
 }
 
 

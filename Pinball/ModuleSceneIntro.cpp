@@ -73,7 +73,11 @@ bool ModuleSceneIntro::Start()
 
 	
 	dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+
+	flipper_hit_fx = App->audio->LoadFx("Assets/audio/flipper_hit.wav");
+
 	AddBouncers();
+
 	//Fonts
 	font_score = App->fonts->Load("Assets/fonts/score_points_font.png", "01234.56789 ", 2);
 	return ret;
@@ -100,10 +104,11 @@ update_status ModuleSceneIntro::Update()
 
 	UpdateSensors();
 	PlayerLives();
+	/*score_text;
 	if (App->scene_intro->IsEnabled())
 	{
-		App->fonts->BlitText(0, 5, font_score, score_text);
-	}
+		App->fonts->BlitText(240, 475, font_score, score_text);
+	}*/
 	return UPDATE_CONTINUE;
 
 
@@ -112,9 +117,9 @@ update_status ModuleSceneIntro::Update()
 void ModuleSceneIntro::PlayerLives()
 {
 	//We will use this to blit lives (balls)
-	/*for (int i = 0; i < App->player1->lives - 1; i++)
+	/*for (int i = 0; i < App->player->lives - 1; i++)
 	{
-		App->render->Blit(char_lives, 5 + ((char_pos.w + 2) * i), 20, &char_pos);
+		App->renderer->Blit(char_lives, 5 + ((char_pos.w + 2) * i), 20, &char_pos);
 	}*/
 	if ((App->player->position.y < 300) && (App->player->position.y > 100))
 	{
@@ -134,7 +139,6 @@ void ModuleSceneIntro::PlayerLives()
 		{
 			App->audio->PlayFx(loose_fx);
 		}
-
 	}
 }
 void ModuleSceneIntro::AddBouncers()
