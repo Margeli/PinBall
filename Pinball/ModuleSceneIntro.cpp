@@ -241,16 +241,16 @@ void ModuleSceneIntro::setScores() {
 void ModuleSceneIntro::UpdateSensors() {
 
 	if (bll) { App->renderer->Blit(L_BlueLight, 96, 82); }
-	if (blr) { App->renderer->Blit(L_BlueLight, 122, 76); }
-	if (brl) { App->renderer->Blit(R_BlueLight, 73, 312); }
-	if (brr) { App->renderer->Blit(R_BlueLight, 81, 339); }
-	//else if (rml) { App->renderer->Blit(M_RedLight,  ; }
-	//else if (rmm) { App->renderer->Blit(M_RedLight,); }
-	//else if (rmr) { App->renderer->Blit(M_RedLight, ); }
+	if (blr) { App->renderer->Blit(L_BlueLight, 123, 75); }
+	if (brl) { App->renderer->Blit(R_BlueLight, 312, 73); }
+	if (brr) { App->renderer->Blit(R_BlueLight, 339, 81); }
+	if (rml) { App->renderer->Blit(M_RedLight, 185, 125); }
+	if (rmm) { App->renderer->Blit(M_RedLight,217, 125); }
+	if (rmr) { App->renderer->Blit(M_RedLight, 249, 125 ); }
 	if (gll) { App->renderer->Blit(L_GreenLight, 134, 334); }
 	if (glr) { App->renderer->Blit(L_GreenLight, 163, 322); }
 	if (grl) { App->renderer->Blit(R_GreenLight, 268, 323); }
-	if (grr) { App->renderer->Blit(R_GreenLight, 294, 335); }
+	if (grr) { App->renderer->Blit(R_GreenLight, 298, 335); }
 	if (rll) { App->renderer->Blit(L_RedLight, 63, 410); }
 	if (rlr) { App->renderer->Blit(L_RedLight, 73, 378); }
 	if (rrl) { App->renderer->Blit(R_RedLight, 375, 378); }
