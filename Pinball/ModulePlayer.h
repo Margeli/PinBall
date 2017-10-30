@@ -22,7 +22,7 @@ public:
 	bool CleanUp();
 
 	iPoint position;
-	uint score;
+	uint score = 120000;
 	uint lives ;
 private:
 	void OnCollision(PhysBody * bodyA, PhysBody * bodyB);

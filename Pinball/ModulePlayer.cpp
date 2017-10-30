@@ -31,6 +31,7 @@ bool ModulePlayer::Start()
 	setPusher();
 	setLeftFlipper();
 	setRightFlipper();
+	score = 12200;
 	return true;
 }
 // Unload assets

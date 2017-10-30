@@ -104,11 +104,11 @@ update_status ModuleSceneIntro::Update()
 
 	UpdateSensors();
 	PlayerLives();
-	/*score_text;
 	if (App->scene_intro->IsEnabled())
 	{
+		sprintf_s(score_text, 10, "%7d", App->player->score);
 		App->fonts->BlitText(240, 475, font_score, score_text);
-	}*/
+	}
 	return UPDATE_CONTINUE;
 
 
