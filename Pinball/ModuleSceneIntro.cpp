@@ -79,7 +79,7 @@ bool ModuleSceneIntro::Start()
 	AddBouncers();
 
 	//Fonts
-	font_score = App->fonts->Load("Assets/fonts/score_points_font.png", "01234.56789 ", 2);
+	font_score = App->fonts->Load("Assets/fonts/pene.png", "0123456789", 1);
 	return ret;
 }
 
