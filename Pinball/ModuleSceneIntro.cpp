@@ -79,7 +79,7 @@ bool ModuleSceneIntro::Start()
 	AddBouncers();
 
 	//Fonts
-	font_score = App->fonts->Load("Assets/fonts/pene.png", "0123456789", 1);
+	font_score = App->fonts->Load("Assets/fonts/score_points_font.png", "01234.56789 ", 2);
 	return ret;
 }
 
@@ -107,7 +107,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->scene_intro->IsEnabled())
 	{
 		sprintf_s(score_text, 10, "%7d", App->player->score);
-		App->fonts->BlitText(240, 475, font_score, score_text);
+		App->fonts->BlitText(210, 475, font_score, score_text);
 	}
 	return UPDATE_CONTINUE;
 
