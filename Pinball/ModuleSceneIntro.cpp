@@ -78,7 +78,7 @@ bool ModuleSceneIntro::Start()
 
 	AddBouncers();
 
-	//Fonts
+	//Fonts for score
 	font_score = App->fonts->Load("Assets/fonts/score_points_font.png", "01234.56789 ", 2);
 	return ret;
 }
@@ -97,7 +97,6 @@ update_status ModuleSceneIntro::Update()
 {
 	if (map_tex != NULL)
 	{
-		
 		App->renderer->Blit(map_tex, 0, 0, NULL, 1.0f);
 	}
 	App->renderer->Blit(spritesheet, 448, 414, &current_animpusher->GetCurrentFrame());
@@ -107,7 +106,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->scene_intro->IsEnabled())
 	{
 		sprintf_s(score_text, 10, "%7d", App->player->score);
-		App->fonts->BlitText(210, 475, font_score, score_text);
+		App->fonts->BlitText(200, 468, font_score, score_text, 1.6f);
 	}
 	return UPDATE_CONTINUE;
 

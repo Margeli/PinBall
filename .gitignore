@@ -300,3 +300,7 @@ __pycache__/
 *.ilk
 *.tlog
 *.obj
+*.pdb
+*.pdb
+*.obj
+*.tlog
