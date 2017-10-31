@@ -23,7 +23,9 @@ enum SensorLight {
 		RED_LEFTLEFT,
 		RED_LEFTRIGHT,
 		RED_RIGHTLEFT,
-		RED_RIGHTRIGHT
+		RED_RIGHTRIGHT,
+		R_LATERAL_NO_LIGHT,
+		L_LATERAL_NO_LIGHT
 };
 
 
@@ -98,6 +100,8 @@ private:
 	bool grl = false;
 	bool grr = false;//------------------
 
+	bool rlnl;		//R_LATERAL_NO_LIGHT
+	bool llnl;		//L_LATERAL_NO_LIGHT
 
 	PhysBody* bg_big_chain;
 	PhysBody* bg_tl_triangle;

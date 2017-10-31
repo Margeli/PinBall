@@ -31,7 +31,7 @@ bool ModulePlayer::Start()
 	setPusher();
 	setLeftFlipper();
 	setRightFlipper();
-	score = 12200;
+	score = 0;
 	return true;
 }
 // Unload assets
@@ -42,6 +42,7 @@ bool ModulePlayer::CleanUp()
 	App->textures->Unload(left_flipper);
 	App->textures->Unload(right_flipper);
 	App->textures->Unload(pusher_ball);
+	score = 0;
 	return true;
 }
 
