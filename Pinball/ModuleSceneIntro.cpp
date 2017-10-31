@@ -204,6 +204,9 @@ void ModuleSceneIntro::setScores() {
 
 	App->player->score = 0;
 
+	//Lateral no light score points
+	sensors.add(App->physics->CreateCircleSensor(84, 640, 10, L_LATERAL_NO_LIGHT));
+	sensors.add(App->physics->CreateCircleSensor(384, 640, 10, R_LATERAL_NO_LIGHT));
 
 	//Top left blue	
 	sensors.add(App->physics->CreateCircleSensor(100, 55, 24, BLUE_LEFTLEFT));
@@ -276,6 +279,7 @@ void ModuleSceneIntro::UpdateSensors() {
 	if (grl && grr) { App->player->score += 8000; grl = grr = false; }
 	if (rll && rlr) { App->player->score += 1000; rll = rlr = false; }
 	if (rrl && rrr) { App->player->score += 3000; rrl = rrr = false; }
+	if (llnl || rlnl) {	App->player->score += 100; rlnl = llnl = false;	}
 
 
 	p2List_item<PhysBody*>* sensor;
@@ -355,6 +359,16 @@ void ModuleSceneIntro::UpdateSensors() {
 		if (sensor->data->active && sensor->data->Sensor_Light == RED_RIGHTRIGHT) {
 			rrr = true;
 			App->audio->PlayFx(bounce_fx);
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == R_LATERAL_NO_LIGHT) {
+			rlnl = true;
+			//App->audio->PlayFx();
+			sensor->data->active = false;
+		}
+		if (sensor->data->active && sensor->data->Sensor_Light == L_LATERAL_NO_LIGHT) {
+			llnl = true;
+			//App->audio->PlayFx();
 			sensor->data->active = false;
 		}
 	}
