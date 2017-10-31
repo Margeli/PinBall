@@ -9,6 +9,7 @@
 #include "ModulePlayer.h"
 #include "ModulePhysics.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleSceneGameOver.h"
 
 #include "Application.h"
 
@@ -23,6 +24,7 @@ Application::Application()
 	player = new ModulePlayer(this);
 	scene_intro = new ModuleSceneIntro(this);
 	physics = new ModulePhysics(this);
+	scene_game_over = new ModuleSceneGameOver(this);
 
 	// The order of calls is very important!
 	// Modules will Init() Start() and Update in this order
@@ -40,6 +42,7 @@ Application::Application()
 	AddModule(fonts);
 	// Scenes
 	AddModule(scene_intro);
+	AddModule(scene_game_over);
 	
 	// Player
 	AddModule(player);

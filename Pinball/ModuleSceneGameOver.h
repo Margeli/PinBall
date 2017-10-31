@@ -13,10 +13,12 @@ public:
 	ModuleSceneGameOver(Application* app, bool start_enabled = true);
 	~ModuleSceneGameOver();
 
+	bool active = false;
+
 	bool Start();
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
-
+	void SceneChange();
 };
-#pragma once
+

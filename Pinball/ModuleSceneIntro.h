@@ -35,6 +35,9 @@ public:
 	ModuleSceneIntro(Application* app, bool start_enabled = true);
 	~ModuleSceneIntro();
 
+	bool active = true;
+	bool background_created = false;
+
 	bool Start();
 	update_status Update();
 	bool CleanUp();
@@ -98,11 +101,11 @@ private:
 	bool gll = false; 
 	bool glr = false;
 	bool grl = false;
-	bool grr = false;//------------------
+	bool grr = false;
 
 	bool rlnl;		//R_LATERAL_NO_LIGHT
 	bool llnl;		//L_LATERAL_NO_LIGHT
-
+					//------------------
 	PhysBody* bg_big_chain;
 	PhysBody* bg_tl_triangle;
 	PhysBody* bg_tr_triangle;
@@ -118,4 +121,7 @@ private:
 	void UpdateSensors();
 
 	void PlayerLives();
+
+	void SceneChange();
+	
 };

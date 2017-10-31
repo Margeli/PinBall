@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleSceneGameOver.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
@@ -25,62 +26,70 @@ ModuleSceneIntro::~ModuleSceneIntro()
 // Load assets
 bool ModuleSceneIntro::Start()
 {
-	LOG("Loading Intro assets");
-	bool ret = true;
-
-	App->renderer->camera.x = App->renderer->camera.y = 0;
-	//Pinball ground that ball can't go outside
-	PinballGround();
-	setScores();
-
-	idle_pusher.PushBack({ 0,0, 19, 103 });
-	anim_pusher.PushBack({ 0,0, 19, 103 });
-	anim_pusher.PushBack({ 24,0, 19, 103 });
-	anim_pusher.PushBack({ 48,0, 19, 103 });
-	anim_pusher.PushBack({ 72,0, 19, 103 });
-	anim_pusher.PushBack({ 0,0, 19, 103 });
-	anim_pusher.speed = 0.8f;
-	anim_pusher.loop = false;
-
-	current_animpusher = &idle_pusher;
 	
-	spritesheet = App->textures->Load("Assets/textures/Pinballthings.png");
-	
-	map_tex = App->textures->Load("Assets/textures/background.png");	
+	if (active) {
+		LOG("Loading Intro assets");
+		
 
-	L_BlueLight = App->textures->Load("Assets/textures/left_blueshine.png");
+		App->renderer->camera.x = App->renderer->camera.y = 0;
+		//Pinball ground that ball can't go outside
+		
 
-	R_BlueLight = App->textures->Load("Assets/textures/right_blueshine.png");
+		idle_pusher.PushBack({ 0,0, 19, 103 });
+		anim_pusher.PushBack({ 0,0, 19, 103 });
+		anim_pusher.PushBack({ 24,0, 19, 103 });
+		anim_pusher.PushBack({ 48,0, 19, 103 });
+		anim_pusher.PushBack({ 72,0, 19, 103 });
+		anim_pusher.PushBack({ 0,0, 19, 103 });
+		anim_pusher.speed = 0.8f;
+		anim_pusher.loop = false;
 
-	L_GreenLight = App->textures->Load("Assets/textures/left_greenshine.png");
+		current_animpusher = &idle_pusher;
 
-	R_GreenLight = App->textures->Load("Assets/textures/right_greenshine.png");
-	
-	L_RedLight = App->textures->Load("Assets/textures/left_redshine.png");
+		spritesheet = App->textures->Load("Assets/textures/Pinballthings.png");
 
-	R_RedLight = App->textures->Load("Assets/textures/right_redshine.png");
+		map_tex = App->textures->Load("Assets/textures/background.png");
 
-	M_RedLight = App->textures->Load("Assets/textures/central_redshine.png");
+		L_BlueLight = App->textures->Load("Assets/textures/left_blueshine.png");
 
-	
-	dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+		R_BlueLight = App->textures->Load("Assets/textures/right_blueshine.png");
+
+		L_GreenLight = App->textures->Load("Assets/textures/left_greenshine.png");
+
+		R_GreenLight = App->textures->Load("Assets/textures/right_greenshine.png");
+
+		L_RedLight = App->textures->Load("Assets/textures/left_redshine.png");
+
+		R_RedLight = App->textures->Load("Assets/textures/right_redshine.png");
+
+		M_RedLight = App->textures->Load("Assets/textures/central_redshine.png");
 
 
-	flipper_hit_fx = App->audio->LoadFx("Assets/audio/flipper_hit.wav");
+		dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
-	bonus_fx = App->audio->LoadFx("Assets/audio/bonus.wav");
 
-	bounce_fx = App->audio->LoadFx("Assets/audio/bouncer.wav");
+		flipper_hit_fx = App->audio->LoadFx("Assets/audio/flipper_hit.wav");
 
-	loose_ball_fx = App->audio->LoadFx("Assets/audio/loose_ball.wav");
+		bonus_fx = App->audio->LoadFx("Assets/audio/bonus.wav");
 
-	loose_fx = App->audio->LoadFx("Assets/audio/loose.wav");
+		bounce_fx = App->audio->LoadFx("Assets/audio/bouncer.wav");
 
-	AddBouncers();
+		loose_ball_fx = App->audio->LoadFx("Assets/audio/loose_ball.wav");
 
-	//Fonts for score
-	font_score = App->fonts->Load("Assets/fonts/score_points_font.png", "01234.56789 ", 2);
-	return ret;
+		loose_fx = App->audio->LoadFx("Assets/audio/loose.wav");
+
+		if (!background_created) {
+			AddBouncers();
+			PinballGround();
+			setScores();
+			background_created  = true;
+		}
+		//Fonts for score
+		font_score = App->fonts->Load("Assets/fonts/score_points_font.png", "01234.56789 ", 2);
+
+		App->player->score = 0;
+	}
+	return true;
 }
 
 // Load assets
@@ -96,6 +105,8 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(L_RedLight);
 	App->textures->Unload(R_RedLight);
 	App->textures->Unload(M_RedLight);
+	
+
 	//need to unload audio
 
 	App->fonts->Unload(font_score);
@@ -105,18 +116,20 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	if (map_tex != NULL)
-	{
-		App->renderer->Blit(map_tex, 0, 0, NULL, 1.0f);
-	}
-	App->renderer->Blit(spritesheet, 448, 414, &current_animpusher->GetCurrentFrame());
+	if (active) {
+		if (map_tex != NULL)
+		{
+			App->renderer->Blit(map_tex, 0, 0, NULL, 1.0f);
+		}
+		App->renderer->Blit(spritesheet, 448, 414, &current_animpusher->GetCurrentFrame());
 
-	UpdateSensors();
-	PlayerLives();
-	if (App->scene_intro->IsEnabled())
-	{
-		sprintf_s(score_text, 10, "%7d", App->player->score);
-		App->fonts->BlitText(200, 468, font_score, score_text, 1.6f);
+		UpdateSensors();
+		PlayerLives();
+		if (App->scene_intro->IsEnabled())
+		{
+			sprintf_s(score_text, 10, "%7d", App->player->score);
+			App->fonts->BlitText(200, 468, font_score, score_text, 1.6f);
+		}
 	}
 	return UPDATE_CONTINUE;
 
@@ -147,7 +160,9 @@ void ModuleSceneIntro::PlayerLives()
 		}
 		if (App->player->lives == 0)
 		{
+			
 			App->audio->PlayFx(loose_fx);
+			SceneChange();
 		}
 	}
 }
@@ -374,6 +389,20 @@ void ModuleSceneIntro::UpdateSensors() {
 		}
 	}
 	
+}
+
+void ModuleSceneIntro::SceneChange()
+{
+	App->scene_game_over->active = true;
+	App->player->active = false;
+	active = false;
+
+	App->player->CleanUp();
+	
+
+	CleanUp();
+	
+	App->scene_game_over->Start();
 }
 
 //We have to call it in scene intro and add here the chains

@@ -21,9 +21,14 @@ public:
 	update_status Update();
 	bool CleanUp();
 
+	bool active = true;
+	bool background_created = false;
+
 	iPoint position;
 	uint score = 120000;
 	uint lives ;
+
+
 private:
 	void OnCollision(PhysBody * bodyA, PhysBody * bodyB);
 	void setRightFlipper();

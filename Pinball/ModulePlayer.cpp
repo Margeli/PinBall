@@ -26,11 +26,13 @@ bool ModulePlayer::Start()
 	left_flipper = App->textures->Load("Assets/textures/left_flipper.png");
 	right_flipper = App->textures->Load("Assets/textures/right_flipper.png");
 	pusher_ball = App->textures->Load("Assets/textures/pusher_ball.png");
-	
-	setBall(PLAYER_POS_X, PLAYER_POS_Y, 0.5f);
-	setPusher();
-	setLeftFlipper();
-	setRightFlipper();
+	if (!background_created) {
+		setBall(PLAYER_POS_X, PLAYER_POS_Y, 0.5f);
+		setPusher();
+		setLeftFlipper();
+		setRightFlipper();
+		background_created = true;
+	}
 	score = 0;
 	return true;
 }
@@ -42,7 +44,9 @@ bool ModulePlayer::CleanUp()
 	App->textures->Unload(left_flipper);
 	App->textures->Unload(right_flipper);
 	App->textures->Unload(pusher_ball);
-	score = 0;
+
+	
+	
 	return true;
 }
 
@@ -51,53 +55,54 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	
+	if (active) {
 
-	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
-	{
-		R_Flipper_joint->EnableMotor(true);
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
+		{
+			R_Flipper_joint->EnableMotor(true);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
+		{
+			R_Flipper_joint->EnableMotor(false);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
+		{
+			L_Flipper_joint->EnableMotor(true);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
+		{
+			L_Flipper_joint->EnableMotor(false);
+		}
+
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		{
+			App->scene_intro->current_animpusher = &App->scene_intro->anim_pusher;
+			pusherjoint->EnableMotor(true);
+		}
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+		{
+			App->scene_intro->anim_pusher.Reset();
+			App->scene_intro->current_animpusher = &App->scene_intro->idle_pusher;
+			pusherjoint->EnableMotor(false);
+
+		}
+
+
+
+
+		//Flippers Draw------
+
+		R_Flipper->GetPosition(position.x, position.y);
+		App->renderer->Blit(right_flipper, position.x, position.y, NULL, 1.0f, 1.0f, R_Flipper->GetRotation());
+
+		L_Flipper->GetPosition(position.x, position.y);
+		App->renderer->Blit(left_flipper, position.x, position.y, NULL, 1.0f, 1.0f, L_Flipper->GetRotation());
+
+		//Ball Draw--------------------
+		player_ball->GetPosition(position.x, position.y);
+		App->renderer->Blit(ball_tex, position.x, position.y, NULL, 1.0f, 1.0f, player_ball->GetRotation());
+
 	}
-	 if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP)
-	{
-		R_Flipper_joint->EnableMotor(false);
-	}
-	 if (App->input->GetKey(SDL_SCANCODE_A) == KEY_DOWN)
-	 {
-		 L_Flipper_joint->EnableMotor(true);
-	 }
-	 if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP)
-	 {
-		 L_Flipper_joint->EnableMotor(false);
-	 }
-
-	 if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-	 {
-		 App->scene_intro->current_animpusher = &App->scene_intro->anim_pusher;
-		 pusherjoint->EnableMotor(true);
-	 }
-   	 if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
-	 {
-		 App->scene_intro->anim_pusher.Reset();
-		 App->scene_intro->current_animpusher = &App->scene_intro->idle_pusher;
-		 pusherjoint->EnableMotor(false);
-
-	 }
-	 
-
-
-	 
-	//Flippers Draw------
-	 
-	R_Flipper->GetPosition(position.x, position.y);
-	App->renderer->Blit(right_flipper, position.x, position.y, NULL, 1.0f, 1.0f, R_Flipper->GetRotation());
-
-	L_Flipper->GetPosition(position.x, position.y);
-	App->renderer->Blit(left_flipper, position.x, position.y, NULL, 1.0f, 1.0f, L_Flipper->GetRotation());
-	 
-	//Ball Draw--------------------
-	player_ball->GetPosition(position.x, position.y);
-	App->renderer->Blit(ball_tex, position.x, position.y, NULL, 1.0f, 1.0f, player_ball->GetRotation());
-
 	return UPDATE_CONTINUE;
 }
 
