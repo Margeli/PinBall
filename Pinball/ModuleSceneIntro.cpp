@@ -125,11 +125,12 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::PlayerLives()
 {
-	//We will use this to blit lives (balls)
-	/*for (int i = 0; i < App->player->lives - 1; i++)
+	//This is for the lives shown in the right space
+	for (int i = 0; i < App->player->lives - 1; i++)
 	{
-		App->renderer->Blit(char_lives, 5 + ((char_pos.w + 2) * i), 20, &char_pos);
-	}*/
+		App->renderer->Blit(App->player->ball_tex, 446 - 11* i, 570 - 15 * i, NULL, 1.0f);
+	}
+
 	if ((App->player->position.y < 300) && (App->player->position.y > 100))
 	{
 		dead = false;	
