@@ -110,6 +110,8 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(R_RedLight);
 	App->textures->Unload(M_RedLight);
 	
+	// sets all light sensors to false
+	bll = blr = brl = brr = rll = rlr = rrl = rrr = rml = rmr = rmm = gll = glr = grl = grr = rlnl = llnl = false;
 
 	//need to unload audio
 
@@ -129,11 +131,10 @@ update_status ModuleSceneIntro::Update()
 
 		UpdateSensors();
 		PlayerLives();
-		if (App->scene_intro->IsEnabled())
-		{
-			sprintf_s(score_text, 10, "%7d", App->player->score);
-			App->fonts->BlitText(200, 468, font_score, score_text, 1.6f);
-		}
+		
+		sprintf_s(score_text, 10, "%7d", App->player->score);
+		App->fonts->BlitText(140, 465, font_score, score_text, 3.0f);
+		
 	
 	return UPDATE_CONTINUE;
 

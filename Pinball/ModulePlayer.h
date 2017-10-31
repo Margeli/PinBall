@@ -6,7 +6,7 @@
 #include "Box2D/Box2D/Box2D.h"
 
 #define PLAYER_POS_X 455
-#define PLAYER_POS_Y 365
+#define PLAYER_POS_Y 340
 
 class PhysBody;
 struct SDL_Texture;
@@ -24,7 +24,7 @@ public:
 	bool background_created = false;
 
 	iPoint position;
-	uint score = 120000;
+	uint score = 0;
 	uint lives ;
 
 

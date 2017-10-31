@@ -25,6 +25,7 @@ bool ModuleSceneGameOver::Start()
 {
 	LOG("Loading G.0. assets");
 	game_over_tex = App->textures->Load("Assets/textures/game_over.png");
+	font_score = App->fonts->Load("Assets/fonts/score_points_font.png", "01234.56789 ", 2);
 	
 	return true;
 
@@ -35,6 +36,7 @@ bool ModuleSceneGameOver::CleanUp()
 {
 	LOG("Unloading G.O scene");
 	App->textures->Unload(game_over_tex);
+	App->fonts->Unload(font_score);
 
 	return true;
 }
@@ -44,14 +46,16 @@ update_status ModuleSceneGameOver::Update()
 {	
 
 	
-		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) { SceneChange(); }
+	if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN) { SceneChange(); }
 
 
-		if (game_over_tex != NULL)
-		{
-			App->renderer->Blit(game_over_tex, 0, 0, NULL, 1.0f);
-		}
+	if (game_over_tex != NULL)
+	{
+		App->renderer->Blit(game_over_tex, 0, 0, NULL, 1.0f);
+	}
 	
+	sprintf_s(score_text, 10, "%7d", App->player->score);
+	App->fonts->BlitText(210, 570, font_score, score_text, 4.0f);
 
 	return UPDATE_CONTINUE;
 }

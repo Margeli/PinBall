@@ -24,6 +24,8 @@ public:
 
 private:
 	SDL_Texture* game_over_tex;
+	int font_score = -1;
+	char score_text[10];
 
 };
 
