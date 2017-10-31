@@ -65,19 +65,9 @@ bool ModuleSceneIntro::Start()
 
 		M_RedLight = App->textures->Load("Assets/textures/central_redshine.png");
 
-	//Fx
-	
-
-
-
-
 		dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
-
-	
-	
-	earn_points_fx = App->audio->LoadFx("Assets/audio/points.wav");
-
-
+		
+		earn_points_fx = App->audio->LoadFx("Assets/audio/points.wav");
 
 		flipper_hit_fx = App->audio->LoadFx("Assets/audio/flipper_hit.wav");
 
@@ -288,14 +278,14 @@ void ModuleSceneIntro::UpdateSensors() {
 	if (rrl) { App->renderer->Blit(R_RedLight, 375, 378); }
 	if (rrr) { App->renderer->Blit(R_RedLight, 385, 411); }
 
-	if (bll && blr) { App->player->score += 15000; bll = blr = false; }
-	if (brl && brr) { App->player->score += 20000; brl = brr = false; }
-	if (rml && rmm && rmr) { App->player->score += 10000; rml = rmm = rmr = false; }
-	if (gll && glr) { App->player->score += 5000; gll = glr = false; }
-	if (grl && grr) { App->player->score += 8000; grl = grr = false; }
-	if (rll && rlr) { App->player->score += 1000; rll = rlr = false; }
-	if (rrl && rrr) { App->player->score += 3000; rrl = rrr = false; }
-	if (llnl || rlnl) {	App->player->score += 100; rlnl = llnl = false;	}
+	if (bll && blr) { App->player->score += 15000; bll = blr = false; App->audio->PlayFx(earn_points_fx); }
+	if (brl && brr) { App->player->score += 20000; brl = brr = false; App->audio->PlayFx(earn_points_fx); }
+	if (rml && rmm && rmr) { App->player->score += 10000; rml = rmm = rmr = false; App->audio->PlayFx(earn_points_fx); }
+	if (gll && glr) { App->player->score += 5000; gll = glr = false; App->audio->PlayFx(earn_points_fx); }
+	if (grl && grr) { App->player->score += 8000; grl = grr = false; App->audio->PlayFx(earn_points_fx); }
+	if (rll && rlr) { App->player->score += 1000; rll = rlr = false; App->audio->PlayFx(earn_points_fx); }
+	if (rrl && rrr) { App->player->score += 3000; rrl = rrr = false; App->audio->PlayFx(earn_points_fx); }
+	if (llnl || rlnl) { App->player->score += 100; rlnl = llnl = false; App->audio->PlayFx(earn_points_fx); }
 
 
 	p2List_item<PhysBody*>* sensor;
