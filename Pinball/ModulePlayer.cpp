@@ -38,9 +38,10 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading ball");
-	
-	
-
+	App->textures->Unload(ball_tex);
+	App->textures->Unload(left_flipper);
+	App->textures->Unload(right_flipper);
+	App->textures->Unload(pusher_ball);
 	return true;
 }
 

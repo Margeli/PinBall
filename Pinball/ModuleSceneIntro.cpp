@@ -46,15 +46,7 @@ bool ModuleSceneIntro::Start()
 	
 	spritesheet = App->textures->Load("Assets/textures/Pinballthings.png");
 	
-	map_tex = App->textures->Load("Assets/textures/background.png");
-
-	bonus_fx = App->audio->LoadFx("Assets/audio/bonus.wav");
-
-	bounce_fx = App->audio->LoadFx("Assets/audio/bouncer.wav");
-
-	loose_ball_fx = App->audio->LoadFx("Assets/audio/loose_ball.wav");
-
-	loose_fx = App->audio->LoadFx("Assets/audio/loose.wav");
+	map_tex = App->textures->Load("Assets/textures/background.png");	
 
 	L_BlueLight = App->textures->Load("Assets/textures/left_blueshine.png");
 
@@ -63,7 +55,6 @@ bool ModuleSceneIntro::Start()
 	L_GreenLight = App->textures->Load("Assets/textures/left_greenshine.png");
 
 	R_GreenLight = App->textures->Load("Assets/textures/right_greenshine.png");
-
 	
 	L_RedLight = App->textures->Load("Assets/textures/left_redshine.png");
 
@@ -74,7 +65,16 @@ bool ModuleSceneIntro::Start()
 	
 	dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
 
+
 	flipper_hit_fx = App->audio->LoadFx("Assets/audio/flipper_hit.wav");
+
+	bonus_fx = App->audio->LoadFx("Assets/audio/bonus.wav");
+
+	bounce_fx = App->audio->LoadFx("Assets/audio/bouncer.wav");
+
+	loose_ball_fx = App->audio->LoadFx("Assets/audio/loose_ball.wav");
+
+	loose_fx = App->audio->LoadFx("Assets/audio/loose.wav");
 
 	AddBouncers();
 
@@ -87,6 +87,16 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
+	App->textures->Unload(spritesheet);
+	App->textures->Unload(map_tex);
+	App->textures->Unload(L_BlueLight);
+	App->textures->Unload(R_BlueLight);
+	App->textures->Unload(L_GreenLight);
+	App->textures->Unload(R_GreenLight);
+	App->textures->Unload(L_RedLight);
+	App->textures->Unload(R_RedLight);
+	App->textures->Unload(M_RedLight);
+	//need to unload audio
 
 	App->fonts->Unload(font_score);
 	return true;
@@ -143,46 +153,46 @@ void ModuleSceneIntro::PlayerLives()
 void ModuleSceneIntro::AddBouncers()
 {
 	//Top left blue	
-	bouncers.add(App->physics->CreateCircle(100, 55, 20, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(100, 55, 18, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
-	bouncers.add(App->physics->CreateCircle(135, 45, 20, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(135, 45, 18, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
 
 	//Top right blue	
-	bouncers.add(App->physics->CreateCircle(333, 48, 20, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(333, 48, 18, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
-	bouncers.add(App->physics->CreateCircle(366, 58, 20, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(366, 58, 18, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
 	
 	//Top centre red	
-	bouncers.add(App->physics->CreateCircle(204, 109, 12, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(204, 109, 10, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
-	bouncers.add(App->physics->CreateCircle(235, 109, 12, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(235, 109, 10, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
-	bouncers.add(App->physics->CreateCircle(265, 109, 12, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(265, 109, 10, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
 
 	//Mid left green	
-	bouncers.add(App->physics->CreateCircle(142, 320, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(142, 320, 13, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
-	bouncers.add(App->physics->CreateCircle(175, 305, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(175, 305, 13, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
 
 	//Mid right green	
-	bouncers.add(App->physics->CreateCircle(295, 305, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(295, 305, 13, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
-	bouncers.add(App->physics->CreateCircle(326, 319, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(326, 319, 13, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
 
 	//Bottom left red
-	bouncers.add(App->physics->CreateCircle(45, 417, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(45, 417, 13, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
-	bouncers.add(App->physics->CreateCircle(56, 384, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(56, 384, 13, 0.8f, b2_staticBody));
 	bouncers.getLast()->data->listener = this;
 
 	//Bottom right red
-	bouncers.add(App->physics->CreateCircle(411, 383, 15, 0.8f, b2_staticBody));
-	bouncers.add(App->physics->CreateCircle(420, 415, 15, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(411, 383, 13, 0.8f, b2_staticBody));
+	bouncers.add(App->physics->CreateCircle(420, 415, 13, 0.8f, b2_staticBody));
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
@@ -196,47 +206,47 @@ void ModuleSceneIntro::setScores() {
 
 
 	//Top left blue	
-	sensors.add(App->physics->CreateCircleSensor(100, 55, 22, BLUE_LEFTLEFT));
+	sensors.add(App->physics->CreateCircleSensor(100, 55, 24, BLUE_LEFTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(135, 45, 22, BLUE_LEFTRIGHT));
+	sensors.add(App->physics->CreateCircleSensor(135, 45, 24, BLUE_LEFTRIGHT));
 	sensors.getLast()->data->listener = this;
 
 	//Top right blue	
-	sensors.add(App->physics->CreateCircleSensor(333, 48, 22, BLUE_RIGHTLEFT));
+	sensors.add(App->physics->CreateCircleSensor(333, 48, 24, BLUE_RIGHTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(366, 58, 22, BLUE_RIGHTRIGHT));
+	sensors.add(App->physics->CreateCircleSensor(366, 58, 24, BLUE_RIGHTRIGHT));
 	sensors.getLast()->data->listener = this;
 
 	//Top centre red	
-	sensors.add(App->physics->CreateCircleSensor(204, 109, 14, RED_CENTERLEFT));
+	sensors.add(App->physics->CreateCircleSensor(204, 109, 16, RED_CENTERLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(235, 109, 14, RED_CENTERCENTER));
+	sensors.add(App->physics->CreateCircleSensor(235, 109, 16, RED_CENTERCENTER));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(265, 109, 14, RED_CENTERRIGHT));
+	sensors.add(App->physics->CreateCircleSensor(265, 109, 16, RED_CENTERRIGHT));
 	sensors.getLast()->data->listener = this;
 
 	//Mid left green	
-	sensors.add(App->physics->CreateCircleSensor(142, 320, 17, GREEN_LEFTLEFT));
+	sensors.add(App->physics->CreateCircleSensor(142, 320, 19, GREEN_LEFTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(175, 305, 17, GREEN_LEFTRIGHT));
+	sensors.add(App->physics->CreateCircleSensor(175, 305, 19, GREEN_LEFTRIGHT));
 	sensors.getLast()->data->listener = this;
 	
 	//Mid right green	
-	sensors.add(App->physics->CreateCircleSensor(295, 305, 17, GREEN_RIGHTLEFT));
+	sensors.add(App->physics->CreateCircleSensor(295, 305, 19, GREEN_RIGHTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(326, 319, 17, GREEN_RIGHTRIGHT));
+	sensors.add(App->physics->CreateCircleSensor(326, 319, 19, GREEN_RIGHTRIGHT));
 	sensors.getLast()->data->listener = this;
 
 	//Bottom left red
-	sensors.add(App->physics->CreateCircleSensor(45, 417, 17, RED_LEFTLEFT));
+	sensors.add(App->physics->CreateCircleSensor(45, 417, 19, RED_LEFTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(56, 384, 17, RED_LEFTRIGHT));
+	sensors.add(App->physics->CreateCircleSensor(56, 384, 19, RED_LEFTRIGHT));
 	sensors.getLast()->data->listener = this;
 
 	//Bottom right red
-	sensors.add(App->physics->CreateCircleSensor(411, 383, 17, RED_RIGHTLEFT));
+	sensors.add(App->physics->CreateCircleSensor(411, 383, 19, RED_RIGHTLEFT));
 	sensors.getLast()->data->listener = this;
-	sensors.add(App->physics->CreateCircleSensor(420, 415, 17, RED_RIGHTRIGHT));
+	sensors.add(App->physics->CreateCircleSensor(420, 415, 19, RED_RIGHTRIGHT));
 	sensors.getLast()->data->listener = this;
 
 }
@@ -258,6 +268,15 @@ void ModuleSceneIntro::UpdateSensors() {
 	if (rlr) { App->renderer->Blit(L_RedLight, 73, 378); }
 	if (rrl) { App->renderer->Blit(R_RedLight, 375, 378); }
 	if (rrr) { App->renderer->Blit(R_RedLight, 385, 411); }
+
+	if (bll && blr) { App->player->score += 15000; bll = blr = false; }
+	if (brl && brr) { App->player->score += 20000; brl = brr = false; }
+	if (rml && rmm && rmr) { App->player->score += 10000; rml = rmm = rmr = false; }
+	if (gll && glr) { App->player->score += 5000; gll = glr = false; }
+	if (grl && grr) { App->player->score += 8000; grl = grr = false; }
+	if (rll && rlr) { App->player->score += 1000; rll = rlr = false; }
+	if (rrl && rrr) { App->player->score += 3000; rrl = rrr = false; }
+
 
 	p2List_item<PhysBody*>* sensor;
 	sensor = sensors.getFirst();
