@@ -46,6 +46,7 @@ Application::Application()
 	
 	// Player
 	AddModule(player);
+	scene_game_over->Disable();
 }
 
 Application::~Application()
