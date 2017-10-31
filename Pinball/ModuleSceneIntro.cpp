@@ -60,12 +60,23 @@ bool ModuleSceneIntro::Start()
 
 		L_RedLight = App->textures->Load("Assets/textures/left_redshine.png");
 
+
 		R_RedLight = App->textures->Load("Assets/textures/right_redshine.png");
 
 		M_RedLight = App->textures->Load("Assets/textures/central_redshine.png");
 
+	//Fx
+	
+
+
+
 
 		dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
+
+	
+	
+	earn_points_fx = App->audio->LoadFx("Assets/audio/points.wav");
+
 
 
 		flipper_hit_fx = App->audio->LoadFx("Assets/audio/flipper_hit.wav");
@@ -170,47 +181,36 @@ void ModuleSceneIntro::AddBouncers()
 {
 	//Top left blue	
 	bouncers.add(App->physics->CreateCircle(100, 55, 18, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(135, 45, 18, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 
 	//Top right blue	
 	bouncers.add(App->physics->CreateCircle(333, 48, 18, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(366, 58, 18, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 	
 	//Top centre red	
 	bouncers.add(App->physics->CreateCircle(204, 109, 10, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(235, 109, 10, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(265, 109, 10, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 
 	//Mid left green	
 	bouncers.add(App->physics->CreateCircle(142, 320, 13, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(175, 305, 13, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 
 	//Mid right green	
 	bouncers.add(App->physics->CreateCircle(295, 305, 13, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(326, 319, 13, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 
 	//Bottom left red
 	bouncers.add(App->physics->CreateCircle(45, 417, 13, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
 	bouncers.add(App->physics->CreateCircle(56, 384, 13, 0.8f, b2_staticBody));
-	bouncers.getLast()->data->listener = this;
+	
 
 	//Bottom right red
 	bouncers.add(App->physics->CreateCircle(411, 383, 13, 0.8f, b2_staticBody));
 	bouncers.add(App->physics->CreateCircle(420, 415, 13, 0.8f, b2_staticBody));
 }
 
+//Needs to be call because its virtual
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	

@@ -23,28 +23,39 @@ ModuleSceneGameOver::~ModuleSceneGameOver()
 // Load assets
 bool ModuleSceneGameOver::Start()
 {
+
 	
 	if (active) {
 		LOG("Loading G.0. assets");
-		
+		game_over_tex = App->textures->Load("Assets/textures/game_over.png");
 	}
 	return true;
+
 }
 
 // Load assets
 bool ModuleSceneGameOver::CleanUp()
 {
 	LOG("Unloading G.O scene");
-	
+	App->textures->Unload(game_over_tex);
+
 	return true;
 }
 
 // Update: draw background
 update_status ModuleSceneGameOver::Update()
 {	
+
 	if (active) {
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) { SceneChange(); }
+
+
+		if (game_over_tex != NULL)
+		{
+			App->renderer->Blit(game_over_tex, 0, 0, NULL, 1.0f);
+		}
 	}
+
 	return UPDATE_CONTINUE;
 }
 

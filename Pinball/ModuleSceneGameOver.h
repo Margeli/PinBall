@@ -19,6 +19,11 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
+
 	void SceneChange();
+
+private:
+	SDL_Texture* game_over_tex;
+
 };
 
