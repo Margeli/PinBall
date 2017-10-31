@@ -25,6 +25,7 @@ bool ModuleSceneGameOver::Start()
 {
 	LOG("Loading G.0. assets");
 	bool ret = true;
+	game_over_tex = App->textures->Load("Assets/textures/game_over.png");
 
 	return ret;
 }
@@ -33,7 +34,8 @@ bool ModuleSceneGameOver::Start()
 bool ModuleSceneGameOver::CleanUp()
 {
 	LOG("Unloading G.O scene");
-	
+	App->textures->Unload(game_over_tex);
+
 	return true;
 }
 
