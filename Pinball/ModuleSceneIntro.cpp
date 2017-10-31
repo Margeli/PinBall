@@ -27,12 +27,14 @@ ModuleSceneIntro::~ModuleSceneIntro()
 bool ModuleSceneIntro::Start()
 {
 	
-	if (active) {
+	
 		LOG("Loading Intro assets");
 		
-
+		
 		App->renderer->camera.x = App->renderer->camera.y = 0;
 		//Pinball ground that ball can't go outside
+		if(App->player->player_ball!= nullptr)
+		App->player->player_ball->body->SetTransform({ PIXEL_TO_METERS(PLAYER_POS_X),PIXEL_TO_METERS(PLAYER_POS_Y) }, 0);
 		
 
 		idle_pusher.PushBack({ 0,0, 19, 103 });
@@ -65,19 +67,10 @@ bool ModuleSceneIntro::Start()
 
 		M_RedLight = App->textures->Load("Assets/textures/central_redshine.png");
 
-	//Fx
-	
-
-
-
-
 		dead_sensor = App->physics->CreateRectangleSensor(SCREEN_WIDTH / 2, SCREEN_HEIGHT, SCREEN_WIDTH, 50);
-
-	
-	
-	earn_points_fx = App->audio->LoadFx("Assets/audio/points.wav");
-
-
+		
+		//Fx	
+		earn_points_fx = App->audio->LoadFx("Assets/audio/points.wav");
 
 		flipper_hit_fx = App->audio->LoadFx("Assets/audio/flipper_hit.wav");
 
@@ -99,7 +92,7 @@ bool ModuleSceneIntro::Start()
 		font_score = App->fonts->Load("Assets/fonts/score_points_font.png", "01234.56789 ", 2);
 
 		App->player->score = 0;
-	}
+	
 	return true;
 }
 
@@ -127,7 +120,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	if (active) {
+	
 		if (map_tex != NULL)
 		{
 			App->renderer->Blit(map_tex, 0, 0, NULL, 1.0f);
@@ -141,7 +134,7 @@ update_status ModuleSceneIntro::Update()
 			sprintf_s(score_text, 10, "%7d", App->player->score);
 			App->fonts->BlitText(200, 468, font_score, score_text, 1.6f);
 		}
-	}
+	
 	return UPDATE_CONTINUE;
 
 
@@ -393,16 +386,10 @@ void ModuleSceneIntro::UpdateSensors() {
 
 void ModuleSceneIntro::SceneChange()
 {
-	App->scene_game_over->active = true;
-	App->player->active = false;
-	active = false;
+	App->player->Disable();	
+	this->Disable();
 
-	App->player->CleanUp();
-	
-
-	CleanUp();
-	
-	App->scene_game_over->Start();
+	App->scene_game_over->Enable();
 }
 
 //We have to call it in scene intro and add here the chains

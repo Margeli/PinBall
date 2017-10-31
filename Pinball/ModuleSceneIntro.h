@@ -35,7 +35,7 @@ public:
 	ModuleSceneIntro(Application* app, bool start_enabled = true);
 	~ModuleSceneIntro();
 
-	bool active = true;
+	
 	bool background_created = false;
 
 	bool Start();

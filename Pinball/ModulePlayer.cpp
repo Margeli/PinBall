@@ -55,7 +55,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	if (active) {
+	
 
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_DOWN)
 		{
@@ -102,7 +102,7 @@ update_status ModulePlayer::Update()
 		player_ball->GetPosition(position.x, position.y);
 		App->renderer->Blit(ball_tex, position.x, position.y, NULL, 1.0f, 1.0f, player_ball->GetRotation());
 
-	}
+	
 	return UPDATE_CONTINUE;
 }
 

@@ -23,12 +23,9 @@ ModuleSceneGameOver::~ModuleSceneGameOver()
 // Load assets
 bool ModuleSceneGameOver::Start()
 {
-
+	LOG("Loading G.0. assets");
+	game_over_tex = App->textures->Load("Assets/textures/game_over.png");
 	
-	if (active) {
-		LOG("Loading G.0. assets");
-		game_over_tex = App->textures->Load("Assets/textures/game_over.png");
-	}
 	return true;
 
 }
@@ -46,7 +43,7 @@ bool ModuleSceneGameOver::CleanUp()
 update_status ModuleSceneGameOver::Update()
 {	
 
-	if (active) {
+	
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) { SceneChange(); }
 
 
@@ -54,22 +51,17 @@ update_status ModuleSceneGameOver::Update()
 		{
 			App->renderer->Blit(game_over_tex, 0, 0, NULL, 1.0f);
 		}
-	}
+	
 
 	return UPDATE_CONTINUE;
 }
 
 void ModuleSceneGameOver::SceneChange()
 {
-	App->scene_intro->active = true;
-	App->player->active = true;
-	active = false;
-
-	CleanUp();
-
+	App->scene_intro->Enable();
+	App->player->Enable();
+	Disable();	
 	
-	App->player->Start();
-	App->scene_intro->Start();
 }
 
 

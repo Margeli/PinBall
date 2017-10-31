@@ -21,7 +21,6 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	bool active = true;
 	bool background_created = false;
 
 	iPoint position;
