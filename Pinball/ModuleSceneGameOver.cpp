@@ -42,6 +42,11 @@ bool ModuleSceneGameOver::CleanUp()
 // Update: draw background
 update_status ModuleSceneGameOver::Update()
 {	
+	if (game_over_tex != NULL)
+	{
+		App->renderer->Blit(game_over_tex, 0, 0, NULL, 1.0f);
+	}
+
 	return UPDATE_CONTINUE;
 }
 

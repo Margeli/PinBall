@@ -69,6 +69,7 @@ public:
 	SDL_Texture* map_tex;
 	uint bonus_fx;
 	uint bounce_fx;
+	uint earn_points_fx;
 	uint loose_ball_fx;
 	uint loose_fx;
 	uint flipper_hit_fx;
