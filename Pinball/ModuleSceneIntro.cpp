@@ -33,9 +33,11 @@ bool ModuleSceneIntro::Start()
 		
 		App->renderer->camera.x = App->renderer->camera.y = 0;
 		//Pinball ground that ball can't go outside
-		if(App->player->player_ball != nullptr)
-		App->player->player_ball->body->SetTransform({ PIXEL_TO_METERS(PLAYER_POS_X),PIXEL_TO_METERS(PLAYER_POS_Y) }, 0);
-		
+		if (App->player->player_ball != nullptr)
+		{
+			App->player->player_ball->body->SetTransform({ PIXEL_TO_METERS(PLAYER_POS_X),PIXEL_TO_METERS(PLAYER_POS_Y) }, 0);
+			App->player->player_ball->body->SetLinearVelocity({ 0,0 });
+		}
 
 		idle_pusher.PushBack({ 48,0, 19, 103 });
 		anim_pusher.PushBack({ 48,0, 19, 103 });
@@ -162,11 +164,11 @@ void ModuleSceneIntro::PlayerLives()
 		if (App->player->lives != 0) 
 		{
 			App->player->player_ball->body->SetTransform({ PIXEL_TO_METERS(PLAYER_POS_X),PIXEL_TO_METERS(PLAYER_POS_Y) }, 0);
+			App->player->player_ball->body->SetLinearVelocity({ 0, 0 });
 			App->audio->PlayFx(loose_ball_fx);
 		}
 		if (App->player->lives == 0)
-		{
-			
+		{			
 			App->audio->PlayFx(loose_fx);
 			SceneChange();
 		}
