@@ -84,11 +84,7 @@ update_status ModulePlayer::Update()
 			App->scene_intro->anim_pusher.Reset();
 			App->scene_intro->current_animpusher = &App->scene_intro->idle_pusher;
 			pusherjoint->EnableMotor(false);
-
 		}
-
-
-
 
 		//Flippers Draw------
 
@@ -108,29 +104,29 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(PhysBody * body_A, PhysBody * body_B)
 {
-	
+
 	if (body_B->sensor) {
 		p2List_item<PhysBody*>* sensor;
 		sensor = App->scene_intro->sensors.getFirst();
-		
-		for (sensor; sensor != nullptr;sensor = sensor->next) {
-			if (sensor->data==body_B) {
-				sensor->data->active = true;					
-			}		
-		}	
+
+		for (sensor; sensor != nullptr; sensor = sensor->next) {
+			if (sensor->data == body_B) {
+				sensor->data->active = true;
+			}
+		}
 	}
-	if ((body_B == L_Flipper || body_B == R_Flipper) && (R_Flipper_joint->IsMotorEnabled()|| L_Flipper_joint->IsMotorEnabled()))
-	{
+	if ((body_B == L_Flipper || body_B == R_Flipper) && (R_Flipper_joint->IsMotorEnabled() || L_Flipper_joint->IsMotorEnabled()))
 		App->audio->PlayFx(App->scene_intro->flipper_hit_fx);
-	}
-	else
-		App->audio->PlayFx(App->scene_intro->bonus_fx);
+
+	else if (body_B == pusher)
+		App->audio->PlayFx(App->scene_intro->pusher_hit_fx);
+
 }
 
 
 void ModulePlayer::setPusher(){
 
-	pusher = App->physics->CreateRectangle(455, 416, 18, 100, b2_dynamicBody);
+	pusher = App->physics->CreateRectangle(455, 416, 18, 68, b2_dynamicBody);
 	pusher_pivot = App->physics->CreateRectangle(457, 502, 18, 20, b2_staticBody);
 
 
@@ -149,7 +145,7 @@ void ModulePlayer::setPusher(){
 	prismaticJointDef.lowerTranslation = 0;
 	prismaticJointDef.upperTranslation = PIXEL_TO_METERS(50);
 	prismaticJointDef.enableMotor = false;
-	prismaticJointDef.maxMotorForce = 200;
+	prismaticJointDef.maxMotorForce = 100;
 	prismaticJointDef.motorSpeed = 5000;
 
 	pusherjoint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&prismaticJointDef);

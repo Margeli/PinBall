@@ -50,8 +50,6 @@ public:
 	
 	PhysBody* leftflipper;
 	PhysBody* rightflipper;
-	
-	PhysBody* dead_sensor;
 
 	bool dead = false;
 	bool sensed;
@@ -70,9 +68,11 @@ public:
 	SDL_Texture* M_RedLight;
 
 	SDL_Texture* map_tex;
+	uint intro_music;
 	uint bonus_fx;
 	uint bounce_fx;
 	uint earn_points_fx;
+	uint pusher_hit_fx;
 	uint loose_ball_fx;
 	uint loose_fx;
 	uint flipper_hit_fx;

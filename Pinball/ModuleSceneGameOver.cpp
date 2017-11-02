@@ -24,6 +24,7 @@ ModuleSceneGameOver::~ModuleSceneGameOver()
 bool ModuleSceneGameOver::Start()
 {
 	LOG("Loading G.0. assets");
+	App->audio->PlayMusic("Assets/audio/music/game_over.ogg", 0.0f);
 	game_over_tex = App->textures->Load("Assets/textures/game_over.png");
 	font_score = App->fonts->Load("Assets/fonts/score_points_font.png", "01234.56789 ", 2);
 	
