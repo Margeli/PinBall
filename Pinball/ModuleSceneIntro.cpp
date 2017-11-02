@@ -14,7 +14,15 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	//circle = box = rick = NULL;
+	idle_pusher.PushBack({ 48,0, 19, 103 });
+	anim_pusher.PushBack({ 48,0, 19, 103 });
+	anim_pusher.PushBack({ 24,0, 19, 103 });
+	anim_pusher.PushBack({ 0,0, 19, 103 });
+	anim_pusher.speed = 0.7f;
+	anim_pusher.loop = false;
+
+	
+
 	
 	ray_on = false;
 	sensed = false;
@@ -38,13 +46,6 @@ bool ModuleSceneIntro::Start()
 			App->player->player_ball->body->SetTransform({ PIXEL_TO_METERS(PLAYER_POS_X),PIXEL_TO_METERS(PLAYER_POS_Y) }, 0);
 			App->player->player_ball->body->SetLinearVelocity({ 0,0 });
 		}
-
-		idle_pusher.PushBack({ 48,0, 19, 103 });
-		anim_pusher.PushBack({ 48,0, 19, 103 });
-		anim_pusher.PushBack({ 24,0, 19, 103 });
-		anim_pusher.PushBack({ 0,0, 19, 103 });
-		anim_pusher.speed = 0.7f;
-		anim_pusher.loop = false;
 
 		current_animpusher = &idle_pusher;
 		//--------------------Textures
