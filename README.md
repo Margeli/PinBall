@@ -23,5 +23,3 @@ https://github.com/Margeli/PinBall
 ## Credits
 A game made by Norman Benet González & Carles Margelí Abril.
 
-## License
-All the art & audio that we use are free for comercial use & took from the internet.
