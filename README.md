@@ -1,7 +1,7 @@
 # Assignment Pinball 
 
 ## Roll The Ball (R.T.B)
-It is a platformer game done for the first assignment of the videogames development subject. 
+It is a pinball game done for the first assignment of the physics subject. 
 
 ## Installation
 Decompress the .zip file in any directory and execute the executable inside the decompressed folder.
